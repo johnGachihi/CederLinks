@@ -11,6 +11,14 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.react('resources/js/app.js', 'public/js')
-    .js('resources/js/visitors/app.js', 'public/js/visitors')
-    .sass('resources/sass/app.scss', 'public/css');
+/**
+ * For admin module
+ */
+mix.react('resources/js/admin/app.js', 'public/js/admin')
+    .sass('resources/sass/admin/app.scss', 'public/css/admin');
+
+/**
+ * For visitors module
+ */
+mix.js('resources/js/visitors/app.js', 'public/js/visitors')
+    .sass('resources/sass/visitors/app.scss', 'public/css/visitors/');

@@ -11,23 +11,17 @@
 
     <!--Favicon-->
     <link rel="shortcut icon" href="favicon.PNG"/>
-    <!--end of Favicon-->
-    <!--End of Metatags-->
-
-    <!--Favicon-->
-    <link rel="shortcut icon" href="favicon.PNG"/>
-    <!--end of Favicon-->
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('css/visitors/app.css') }}">
+    <script src="{{ asset('/js/visitors/app.js') }}" defer></script>
 </head>
 <body>
 
 <nav class="navbar px-md-0 navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-        <a class="navbar-brand" href="index.html">CederLinks <span></span></a>
+        <a class="navbar-brand" href="{{ route('visitors.index') }}">CederLinks</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="oi oi-menu"></span> Menu
@@ -35,11 +29,10 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item active"><a href="{{ route('visitors.index') }}" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="practice-areas.html" class="nav-link">Services</a></li>
                 <li class="nav-item"><a href="attorneys.html" class="nav-link">Team</a></li>
-                <!-- <li class="nav-item"><a href="case.html" class="nav-link">Case Studies</a></li> -->
                 <li class="nav-item"><a href="calender.html" class="nav-link">Missions</a></li>
                 <li class="nav-item"><a href="blog.html" class="nav-link">Upcoming</a></li>
                 <li class="nav-item"><a href="partners.html" class="nav-link">Partners</a></li>
@@ -51,7 +44,7 @@
 </nav>
 <!-- END nav -->
 
-<div class="hero-wrap js-fullheight" style="background-image: url('images/bg_1.jpg');"
+<div class="hero-wrap js-fullheight" style="background-image: url('{{ asset('storage/images/bg_1.jpg') }}');"
      data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
@@ -141,110 +134,26 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3 col-sm-6">
-                <div class="block-2 ftco-animate">
-                    <div class="flipper">
-                        <div class="front" style="background-image: url(/images/person_1.jpg);">
-                            <div class="box">
-                                <h2>Rebecca Kim</h2>
-                                <p>Director</p>
-                            </div>
-                        </div>
-                        <div class="back">
-                            <!-- back content -->
-                            <blockquote>
-                                <p>With experience of over 10 years in expert investment, Ms. Rebecca Kimeto is the
-                                    director and Chief Executive Officer of CederLinks Investment Ltd.</p>
-                            </blockquote>
-                            <div class="author d-flex">
-                                <div class="image align-self-center">
-                                    <img src="images/person_1.jpg" alt="">
-                                </div>
-                                <div class="name align-self-center ml-3">Rebecca Kim<span
-                                        class="position">Director</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="block-2 ftco-animate">
-                    <div class="flipper">
-                        <div class="front" style="background-image: url(/images/person_2.jpg);">
-                            <div class="box">
-                                <h2>Linda Chebet</h2>
-                                <p>Office Manager</p>
-                            </div>
-                        </div>
-                        <div class="back">
-                            <!-- back content -->
-                            <blockquote>
-                                <p>Ms. Linda Chebet is the office manager responsible for all office operations and
-                                    appointments. She has experience in Management and customer experience.</p>
-                            </blockquote>
-                            <div class="author d-flex">
-                                <div class="image align-self-center">
-                                    <img src="images/person_2.jpg" alt="">
-                                </div>
-                                <div class="name align-self-center ml-3">Linda Chebet<span class="position">Office Manager</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="block-2 ftco-animate">
-                    <div class="flipper">
-                        <div class="front" style="background-image: url(/images/person_3.jpg);">
-                            <div class="box">
-                                <h2>Mutai Kiprono</h2>
-                                <p>IT Expert</p>
-                            </div>
-                        </div>
-                        <div class="back">
-                            <!-- back content -->
-                            <blockquote>
-                                <p>Mr. Mutai Kiprono is a full stack developer with years of experience in web
-                                    development and mobile app development and is in charge of all IT functions.</p>
-                            </blockquote>
-                            <div class="author d-flex">
-                                <div class="image align-self-center">
-                                    <img src="images/person_3.jpg" alt="">
-                                </div>
-                                <div class="name align-self-center ml-3">Mutai Kiprono <span
-                                        class="position">IT Expert</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="block-2 ftco-animate">
-                    <div class="flipper">
-                        <div class="front" style="background-image: url(/images/person_4.jpg);">
-                            <div class="box">
-                                <h2>Jack Kipchumba</h2>
-                                <p>Secretary</p>
-                            </div>
-                        </div>
-                        <div class="back">
-                            <!-- back content -->
-                            <blockquote>
-                                <p>Mr. Jack Kipchumba is the secretary in charge of all day to day functions in the
-                                    company and works with everyone to ensure smooth operations at Ceder Links.</p>
-                            </blockquote>
-                            <div class="author d-flex">
-                                <div class="image align-self-center">
-                                    <img src="images/person_4.jpg" alt="">
-                                </div>
-                                <div class="name align-self-center ml-3">Jack Kipchumba<span
-                                        class="position">Secretary</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <x-staff-card :image="asset('storage/images/person_1.jpg')"
+              name="Rebecca Kim" occupation="Director">
+                With experience of over 10 years in expert investment, Ms. Rebecca Kimeto is the
+                director and Chief Executive Officer of CederLinks Investment Ltd.
+            </x-staff-card>
+            <x-staff-card :image="asset('storage/images/person_2.jpg')"
+              name="Linda Chebet" occupation="Office Manager">
+                Ms. Linda Chebet is the office manager responsible for all office operations and
+                appointments. She has experience in Management and customer experience.
+            </x-staff-card>
+            <x-staff-card :image="asset('storage/images/person_3.jpg')"
+                name="Mutai Kiprono" occupation="IT Expert">
+                Mr. Mutai Kiprono is a full stack developer with years of experience in web
+                development and mobile app development and is in charge of all IT functions.
+            </x-staff-card>
+            <x-staff-card :image="asset('storage/images/person_4.jpg')"
+                name="Jack Kipchumba" occupation="Secretary">
+                Mr. Jack Kipchumba is the secretary in charge of all day to day functions in the
+                company and works with everyone to ensure smooth operations at Ceder Links.
+            </x-staff-card>
         </div>
     </div>
 </section>
@@ -489,23 +398,6 @@
 </div>
 
 
-{{--<script src="js/jquery.min.js"></script>
-<script src="js/jquery-migrate-3.0.1.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
-<script src="js/jquery.waypoints.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/aos.js"></script>
-<script src="js/jquery.animateNumber.min.js"></script>
-<script src="js/scrollax.min.js"></script>--}}
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-{{--<script src="js/google-map.js"></script>
-<script src="js/main.js"></script>--}}
-<script src="{{ asset('/js/visitors/app.js') }}" defer></script>
-
-
 </body>
 </html>

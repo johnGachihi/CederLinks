@@ -1,4 +1,5 @@
 require('./bootstrap');
+import LazyLoad from "vanilla-lazyload";
 
 AOS.init({
     duration: 800,
@@ -369,5 +370,9 @@ AOS.init({
         }
     };
 
+    // Lazy loading images
+    const lazyLoad = new LazyLoad({
+        elements_selector: '.lazy'
+    })
 })(jQuery);
 
