@@ -6,8 +6,11 @@
 @import "css/animate";
 @import "css/aos";
 @import "css/flaticon";
+@import "css/ionicons.min";
 @import "css/icomoon";
 @import "css/open-iconic-bootstrap.min";
+@import "css/owl/owl.carousel.min.css";
+@import "css/owl/owl.theme.default.min.css";
 
 $font-primary: 'Poppins',Arial, sans-serif;
 
@@ -2147,4 +2150,8 @@ textarea.form-control {
         stroke-dasharray: 89, 200;
         stroke-dashoffset: -136px;
     }
+}
+
+img.object-fit-cover {
+    object-fit: cover;
 }

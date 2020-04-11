@@ -11,6 +11,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 */
 Route::name('visitors.')->group(function () {
     Route::view('/', 'visitors.index')->name('index');
+    Route::view('/about', 'visitors.about')->name('about');
+    Route::view('/services', 'visitors.services')->name('services');
 });
 
 /**

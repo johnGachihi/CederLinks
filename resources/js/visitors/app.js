@@ -67,9 +67,9 @@ AOS.init({
 
     var carousel = function() {
         $('.carousel-testimony').owlCarousel({
-            center: true,
+            // center: true,
             loop: false,
-            items:1,
+            items: 3,
             margin: 30,
             stagePadding: 0,
             nav: false,
