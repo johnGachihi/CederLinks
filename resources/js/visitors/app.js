@@ -1,5 +1,8 @@
 require('./bootstrap');
+require('./auth-modal');
+require('./recapture-callbacks');
 import LazyLoad from "vanilla-lazyload";
+
 
 AOS.init({
     duration: 800,

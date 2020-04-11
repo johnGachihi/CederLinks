@@ -25,7 +25,9 @@
                 <li class="nav-item"><a href="blog.html" class="nav-link">Upcoming</a></li>
                 <li class="nav-item"><a href="partners.html" class="nav-link">Partners</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                <li class="nav-item cta"><a href="#" data-toggle="modal" data-target="#auth-modal" class="nav-link">Member Login</a></li>
+                <li class="nav-item cta">
+                    <a id="auth-modal-show" href="/#" class="nav-link">Member Login</a>
+                </li>
             </ul>
         </div>
     </div>

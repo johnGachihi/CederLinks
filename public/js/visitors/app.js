@@ -18608,6 +18608,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vanilla_lazyload__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vanilla_lazyload__WEBPACK_IMPORTED_MODULE_0__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/visitors/bootstrap.js");
 
+__webpack_require__(/*! ./auth-modal */ "./resources/js/visitors/auth-modal.js");
+
+__webpack_require__(/*! ./recapture-callbacks */ "./resources/js/visitors/recapture-callbacks.js");
+
 
 AOS.init({
   duration: 800,
@@ -18964,6 +18968,74 @@ AOS.init({
     elements_selector: '.lazy'
   });
 })(jQuery);
+
+/***/ }),
+
+/***/ "./resources/js/visitors/auth-modal.js":
+/*!*********************************************!*\
+  !*** ./resources/js/visitors/auth-modal.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var currentTab = '';
+enterRegistrationState();
+$('#modal-register').on('click', function (e) {
+  e.preventDefault();
+  enterRegistrationState();
+});
+$('#modal-login').on('click', function (e) {
+  e.preventDefault();
+  enterLoginState();
+});
+
+function enterRegistrationState() {
+  currentTab = 'register';
+  $('#register-tab').removeClass('d-none');
+  $('#login-tab').addClass('d-none');
+  $('#modal-register').addClass('active');
+  $('#modal-login').removeClass('active');
+}
+
+function enterLoginState() {
+  currentTab = 'login';
+  $('#register-tab').addClass('d-none');
+  $('#login-tab').removeClass('d-none');
+  $('#modal-login').addClass('active');
+  $('#modal-register').removeClass('active');
+}
+
+$('#auth-modal-show').on('click', function (e) {
+  e.preventDefault();
+  $('#auth-modal').modal();
+});
+$('#registration-form').on('submit', function (e) {
+  e.preventDefault();
+  $(this).addClass('was-validated');
+  if (!validateRegistrationForm(this)) return;
+  this.submit();
+});
+
+function validateRegistrationForm(form) {
+  var isValid = true;
+  var htmlFields = ['name', 'email', 'password'];
+
+  for (var _i = 0, _htmlFields = htmlFields; _i < _htmlFields.length; _i++) {
+    var fieldName = _htmlFields[_i];
+    var field = form[fieldName];
+
+    if (!field.checkValidity()) {
+      setError(field, field.validationMessage);
+      isValid = false;
+    }
+  }
+
+  return isValid;
+}
+
+function setError(element, error) {
+  $(element).siblings('.invalid-feedback').text(error);
+}
 
 /***/ }),
 
@@ -22025,6 +22097,28 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   v.appendChild(w);
   return q;
 });
+
+/***/ }),
+
+/***/ "./resources/js/visitors/recapture-callbacks.js":
+/*!******************************************************!*\
+  !*** ./resources/js/visitors/recapture-callbacks.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function onSuccessfulResponse() {
+  $('#g-captcha-val').val('checked');
+}
+
+function onResponseExpired() {
+  $('#g-captcha-val').val('unchecked');
+}
+
+window.gcaptcha = {
+  onSuccessfulResponse: onSuccessfulResponse,
+  onResponseExpired: onResponseExpired
+};
 
 /***/ }),
 

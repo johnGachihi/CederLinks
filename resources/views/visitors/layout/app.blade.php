@@ -12,6 +12,16 @@
 
     <link rel="stylesheet" href="{{ asset('css/visitors/app.css') }}">
     <script src="{{ asset('/js/visitors/app.js') }}" defer></script>
+    {{-- Render Re-capture --}}
+    <script>
+        var onloadCallback = function () {
+            grecaptcha.render('register-recaptcha', {
+                'sitekey': '6LfZA60UAAAAALEr3Ifkla8UKLp_kq2Jz-IRjWUC',
+                'callback': window.gcaptcha.onSuccessfulResponse,
+                'expired-callback': window.gcaptcha.onResponseExpired
+            })
+        }
+    </script>
 </head>
 <body>
 <x-nav-bar/>
@@ -122,22 +132,55 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalLabel">Modal title</h5>
+                <ul class="flex-grow-1 d-flex nav nav-tabs">
+                    <li class="nav-item flex-grow-1 text-center active">
+                        <a id="modal-register" class="nav-link active" href="#">Register</a>
+                    </li>
+                    <li class="nav-item flex-grow-1 text-center">
+                        <a id="modal-login" class="nav-link" href="#">Login</a>
+                    </li>
+                </ul>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                This is my story, this is my song
+                <div id="register-tab">
+                    <form action="{{ route('register') }}" method="POST" novalidate id="registration-form" class="w-75 mx-auto">
+                        @csrf
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-control" placeholder="Insert your Name" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control" placeholder="Insert your Email" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control" placeholder="Insert your Password" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        <div class="mb-3">
+                            <div id="register-recaptcha"></div>
+                            <input class="d-none" id="g-captcha-val" name="g-catcha" required pattern="checked">
+                            <div class="invalid-feedback">
+                                Check this box.
+                            </div>
+                        </div>
+
+                        <button id="register-btn" class="btn btn-primary">Register</button>
+                    </form>
+                </div>
+                <div id="login-tab" class="d-none">Login</div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
 </div>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
 </body>
 </html>
