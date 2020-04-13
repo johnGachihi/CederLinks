@@ -148,9 +148,9 @@
                 <div id="register-tab">
                     <form action="{{ route('register') }}" method="POST" novalidate id="registration-form" class="w-75 mx-auto">
                         @csrf
-                        <x-input name="name" required="true"></x-input>
-                        <x-input name="email" required="true"></x-input>
-                        <x-input name="password" type="password" required="true"></x-input>
+                        <x-input name="name" required="true" :errors="$errors->register"></x-input>
+                        <x-input name="email" required="true" :errors="$errors->register"></x-input>
+                        <x-input name="password" type="password" required="true" :errors="$errors->register"></x-input>
                         <div class="mb-3">
                             <div id="register-recaptcha"></div>
                             <input class="d-none" id="g-captcha-val" name="g-captcha" required pattern="checked">
@@ -176,7 +176,20 @@
                         <button id="register-btn" class="btn btn-primary">Register</button>
                     </form>
                 </div>
-                <div id="login-tab" class="d-none">Login</div>
+                <div id="login-tab" class="d-none">
+                    <form id="login-form" action="{{ route('login') }}" method="POST" class="w-75 mx-auto">
+                        @csrf
+                        <x-input name="email" :errors="$errors->login"></x-input>
+                        <x-input name="password" type="password" :errors="$errors->login"></x-input>
+                        <input type="hidden" name="current_page" value="{{ url()->current() }}">
+                        <div class="d-flex justify-content-between">
+                            <button id="login-btn" class="btn btn-primary">Login</button>
+                            <a class="align-self-end" style="font-size: 13px" href="{{ route('password.request') }}">
+                                Forgot password?
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -185,11 +198,21 @@
     </div>
 </div>
 
-@if($errors->any())
+@if($errors->register->any())
     <script>
-        console.log(@json($errors->all()));
+        console.log('registration', @json($errors->register->all()));
         window.addEventListener('DOMContentLoaded', evt => {
             $('#auth-modal').modal();
+        });
+    </script>
+@endif
+
+@if($errors->login->any())
+    <script>
+        console.log('login', @json($errors->login->all()));
+        window.addEventListener('DOMContentLoaded', evt => {
+            $('#auth-modal').modal();
+            $('#modal-login').trigger('click');
         });
     </script>
 @endif
@@ -204,9 +227,9 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="w-100">
-                        <div class="mx-auto text-center" style="font-size: 20px">Welcome, {{ auth()->user()->name }}.</div>
-                        <div class="text-center">You are now a member</div>
+                    <div class="w-100 text-center">
+                        <div style="font-size: 20px">Welcome @isset(auth()->user()->name){{ ', ' . auth()->user()->name }}@endisset.</div>
+                        <div>You are now a member</div>
                     </div>
                 </div>
             </div>

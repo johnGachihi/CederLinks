@@ -1,4 +1,4 @@
-@props(['name', 'placeholder'])
+@props(['name', 'placeholder', 'errors'])
 
 <div class="form-group">
     <input name="{{ $name }}"
@@ -7,6 +7,6 @@
            value="{{ old($name) }}"
            {{ $attributes }}>
     <div class="invalid-feedback">
-        @error($name) {{$message}} @enderror
+        {{ $errors->first($name) }}
     </div>
 </div>

@@ -54,12 +54,32 @@ function validateRegistrationForm(form) {
         }
     }
 
-    // if (! form['g-captcha'].checkValidity())
-    //     isValid = false;
-
     return isValid;
 }
 
 function setError(element, error) {
     $(element).siblings('.invalid-feedback').text(error)
+}
+
+$('#login-form').on('submit', function (e) {
+    e.preventDefault();
+    $(this).addClass('was-validated');
+    if (! validateLoginForm(this)) {
+        return;
+    }
+
+    this.submit();
+});
+
+function validateLoginForm(form) {
+    let isValid = true;
+    const fieldNames = ['email', 'password'];
+    for (const fieldName of fieldNames) {
+        const field = form[fieldName];
+        if (!field.checkValidity()) {
+            setError(field, field.validationMessage);
+            isValid = false;
+        }
+    }
+    return isValid;
 }

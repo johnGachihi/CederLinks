@@ -19030,15 +19030,41 @@ function validateRegistrationForm(form) {
       setError(field, field.validationMessage);
       isValid = false;
     }
-  } // if (! form['g-captcha'].checkValidity())
-  //     isValid = false;
-
+  }
 
   return isValid;
 }
 
 function setError(element, error) {
   $(element).siblings('.invalid-feedback').text(error);
+}
+
+$('#login-form').on('submit', function (e) {
+  e.preventDefault();
+  $(this).addClass('was-validated');
+
+  if (!validateLoginForm(this)) {
+    return;
+  }
+
+  this.submit();
+});
+
+function validateLoginForm(form) {
+  var isValid = true;
+  var fieldNames = ['email', 'password'];
+
+  for (var _i2 = 0, _fieldNames = fieldNames; _i2 < _fieldNames.length; _i2++) {
+    var fieldName = _fieldNames[_i2];
+    var field = form[fieldName];
+
+    if (!field.checkValidity()) {
+      setError(field, field.validationMessage);
+      isValid = false;
+    }
+  }
+
+  return isValid;
 }
 
 /***/ }),

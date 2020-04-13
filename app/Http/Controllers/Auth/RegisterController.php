@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class RegisterController extends Controller
 {
@@ -24,7 +25,9 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    use RegistersUsers {
+        register as traitRegister;
+    }
 
     /**
      * Where to redirect users after registration.
@@ -74,11 +77,19 @@ class RegisterController extends Controller
         ]);
     }
 
-    protected function registered(Request $request, $user)
+    public function register(Request $request)
     {
-        $request->session()->put('last_page', $request->input('current_page'));
-        Log::error('RegisterController: ' . $request->session()->get('last_page'));
+        try {
+            $this->traitRegister($request);
+        } catch (ValidationException $e) {
+            $e->errorBag('register');
+            throw $e;
+        }
     }
 
 
+    protected function registered(Request $request, $user)
+    {
+        $request->session()->put('last_page', $request->input('current_page'));
+    }
 }

@@ -28368,7 +28368,8 @@ img.object-fit-cover {
      object-fit: cover;
 }
 
-#register-tab .form-control {
+#register-tab .form-control,
+#login-tab .form-control {
   font-size: 16px;
 }
 
