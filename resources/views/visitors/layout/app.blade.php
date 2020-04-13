@@ -166,7 +166,7 @@
                                     required {{ old('t-and-c-checkbox') ? 'checked' : '' }}
                                 >
                                 <label class="form-check-label" for="t-and-c-checkbox" style="font-size: 14px; color: #2c2c2c   ">
-                                    Agree to the <a href="#">Terms and conditions</a>
+                                    Agree to the <a href="{{ route('visitors.terms-and-conditions') }}" target="_blank">Terms and conditions</a>
                                 </label>
                                 <div class="invalid-feedback"></div>
                             </div>

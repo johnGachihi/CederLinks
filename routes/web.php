@@ -13,6 +13,7 @@ Route::name('visitors.')->group(function () {
     Route::view('/', 'visitors.index')->name('index');
     Route::view('/about', 'visitors.about')->name('about');
     Route::view('/services', 'visitors.services')->name('services');
+    Route::view('/t&c', 'visitors.terms-and-conditions')->name('terms-and-conditions');
 });
 
 /**

@@ -88,26 +88,6 @@
                     <a href="pdf.PDF" download class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></a>
                 </div>
             </div>
-            <!-- <div class="col-md-3 text-center">
-                <div class="practice-area ftco-animate">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-medicine"></span>
-                    </div>
-                    <h3><a href="practice-single.html">Drug Offenses</a></h3>
-                    <p>The event stated above will take place in the date shown and will be for investors. e.t.c.</p>
-                    <a href="pdf.PDF" download class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></a>
-                </div>
-            </div> -->
-            <!-- <div class="col-md-3 text-center">
-                <div class="practice-area ftco-animate">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-handcuffs"></span>
-                    </div>
-                    <h3><a href="practice-single.html">Sexual Offenses</a></h3>
-                    <p>The event stated above will take place in the date shown and will be for investors. e.t.c.</p>
-                    <a href="pdf.PDF" download class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></a>
-                </div>
-            </div> -->
         </div>
     </div>
 </section>
