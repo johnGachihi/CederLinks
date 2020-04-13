@@ -194,6 +194,33 @@
     </script>
 @endif
 
+@if(session('verified'))
+    <div id="welcome-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="w-100 d-flex justify-content-end">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="w-100">
+                        <div class="mx-auto text-center" style="font-size: 20px">Welcome, {{ auth()->user()->name }}.</div>
+                        <div class="text-center">You are now a member</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            $('#welcome-modal').modal();
+        })
+    </script>
+@endif
+
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
 </body>

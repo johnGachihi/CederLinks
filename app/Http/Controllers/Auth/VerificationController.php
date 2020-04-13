@@ -42,11 +42,6 @@ class VerificationController extends Controller
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 
-    protected function verified(Request $request)
-    {
-        Log::error('VerificationController: ' . $request->session()->get('last_page'));
-    }
-
     public function redirectTo() {
         return session('last_page');
     }
