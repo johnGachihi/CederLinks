@@ -128,7 +128,7 @@
 </div>
 
 <!--Modal-->
-<div class="modal fade" id="auth-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade" id="auth-modal" data-show="true" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -148,23 +148,27 @@
                 <div id="register-tab">
                     <form action="{{ route('register') }}" method="POST" novalidate id="registration-form" class="w-75 mx-auto">
                         @csrf
-                        <div class="form-group">
-                            <input type="text" name="name" class="form-control" placeholder="Insert your Name" required>
-                            <div class="invalid-feedback"></div>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" name="email" class="form-control" placeholder="Insert your Email" required>
-                            <div class="invalid-feedback"></div>
-                        </div>
-                        <div class="form-group">
-                            <input type="password" name="password" class="form-control" placeholder="Insert your Password" required>
-                            <div class="invalid-feedback"></div>
-                        </div>
+                        <x-input name="name" required="true"></x-input>
+                        <x-input name="email" required="true"></x-input>
+                        <x-input name="password" type="password" required="true"></x-input>
                         <div class="mb-3">
                             <div id="register-recaptcha"></div>
-                            <input class="d-none" id="g-captcha-val" name="g-catcha" required pattern="checked">
-                            <div class="invalid-feedback">
-                                Check this box.
+                            <input class="d-none" id="g-captcha-val" name="g-captcha" required pattern="checked">
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox" value="1"
+                                    id="t-and-c-checkbox"
+                                    name="t-and-c-checkbox"
+                                    required {{ old('t-and-c-checkbox') ? 'checked' : '' }}
+                                >
+                                <label class="form-check-label" for="t-and-c-checkbox" style="font-size: 14px; color: #2c2c2c   ">
+                                    Agree to the <a href="#">Terms and conditions</a>
+                                </label>
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
 
@@ -179,6 +183,15 @@
         </div>
     </div>
 </div>
+
+@if($errors->any())
+    <script>
+        console.log(@json($errors->all()));
+        window.addEventListener('DOMContentLoaded', evt => {
+            $('#auth-modal').modal();
+        });
+    </script>
+@endif
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>

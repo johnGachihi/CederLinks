@@ -19018,7 +19018,9 @@ $('#registration-form').on('submit', function (e) {
 
 function validateRegistrationForm(form) {
   var isValid = true;
-  var htmlFields = ['name', 'email', 'password'];
+  var htmlFields = ['name', 'email', 'password',
+  /*'g-captcha',*/
+  't-and-c-checkbox'];
 
   for (var _i = 0, _htmlFields = htmlFields; _i < _htmlFields.length; _i++) {
     var fieldName = _htmlFields[_i];
@@ -19028,7 +19030,9 @@ function validateRegistrationForm(form) {
       setError(field, field.validationMessage);
       isValid = false;
     }
-  }
+  } // if (! form['g-captcha'].checkValidity())
+  //     isValid = false;
+
 
   return isValid;
 }

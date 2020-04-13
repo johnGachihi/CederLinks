@@ -45,7 +45,7 @@ $('#registration-form').on('submit', function (e) {
 
 function validateRegistrationForm(form) {
     let isValid = true;
-    const htmlFields = ['name', 'email', 'password'];
+    const htmlFields = ['name', 'email', 'password', /*'g-captcha',*/ 't-and-c-checkbox'];
     for (const fieldName of htmlFields) {
         const field = form[fieldName];
         if (!field.checkValidity()) {
@@ -53,6 +53,10 @@ function validateRegistrationForm(form) {
             isValid = false;
         }
     }
+
+    // if (! form['g-captcha'].checkValidity())
+    //     isValid = false;
+
     return isValid;
 }
 
