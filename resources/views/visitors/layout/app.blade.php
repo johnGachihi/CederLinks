@@ -171,6 +171,7 @@
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
+                        <input type="hidden" name="current_page" value="{{ url()->current() }}">
 
                         <button id="register-btn" class="btn btn-primary">Register</button>
                     </form>
