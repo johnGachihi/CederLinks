@@ -18979,7 +18979,7 @@ AOS.init({
 /***/ (function(module, exports) {
 
 var currentTab = '';
-enterRegistrationState();
+enterLoginState();
 $('#modal-register').on('click', function (e) {
   e.preventDefault();
   enterRegistrationState();

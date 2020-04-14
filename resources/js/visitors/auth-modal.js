@@ -1,6 +1,6 @@
 let currentTab = '';
 
-enterRegistrationState();
+enterLoginState();
 
 $('#modal-register').on('click', e => {
     e.preventDefault();

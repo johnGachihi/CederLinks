@@ -133,11 +133,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <ul class="flex-grow-1 d-flex nav nav-tabs">
-                    <li class="nav-item flex-grow-1 text-center active">
-                        <a id="modal-register" class="nav-link active" href="#">Register</a>
-                    </li>
                     <li class="nav-item flex-grow-1 text-center">
                         <a id="modal-login" class="nav-link" href="#">Login</a>
+                    </li>
+                    <li class="nav-item flex-grow-1 text-center active">
+                        <a id="modal-register" class="nav-link active" href="#">Register</a>
                     </li>
                 </ul>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -145,6 +145,20 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div id="login-tab" class="d-none">
+                    <form id="login-form" action="{{ route('login') }}" method="POST" novalidate class="w-75 mx-auto">
+                        @csrf
+                        <x-input name="email" :errors="$errors->login" type="email"></x-input>
+                        <x-input name="password" type="password" :errors="$errors->login"></x-input>
+                        <input type="hidden" name="current_page" value="{{ url()->current() }}">
+                        <div class="d-flex justify-content-between">
+                            <button id="login-btn" class="btn btn-primary">Login</button>
+                            <a class="align-self-end" style="font-size: 13px" href="{{ route('password.request') }}">
+                                Forgot password?
+                            </a>
+                        </div>
+                    </form>
+                </div>
                 <div id="register-tab">
                     <form action="{{ route('register') }}" method="POST" novalidate id="registration-form" class="w-75 mx-auto">
                         @csrf
@@ -163,7 +177,8 @@
                                     type="checkbox" value="1"
                                     id="t-and-c-checkbox"
                                     name="t-and-c-checkbox"
-                                    required {{ old('t-and-c-checkbox') ? 'checked' : '' }}
+                                    required
+                                    @if(old('t-and-c-checkbox')) checked @endif
                                 >
                                 <label class="form-check-label" for="t-and-c-checkbox" style="font-size: 14px; color: #2c2c2c   ">
                                     Agree to the <a href="{{ route('visitors.terms-and-conditions') }}" target="_blank">Terms and conditions</a>
@@ -174,20 +189,6 @@
                         <input type="hidden" name="current_page" value="{{ url()->current() }}">
 
                         <button id="register-btn" class="btn btn-primary">Register</button>
-                    </form>
-                </div>
-                <div id="login-tab" class="d-none">
-                    <form id="login-form" action="{{ route('login') }}" method="POST" class="w-75 mx-auto">
-                        @csrf
-                        <x-input name="email" :errors="$errors->login"></x-input>
-                        <x-input name="password" type="password" :errors="$errors->login"></x-input>
-                        <input type="hidden" name="current_page" value="{{ url()->current() }}">
-                        <div class="d-flex justify-content-between">
-                            <button id="login-btn" class="btn btn-primary">Login</button>
-                            <a class="align-self-end" style="font-size: 13px" href="{{ route('password.request') }}">
-                                Forgot password?
-                            </a>
-                        </div>
                     </form>
                 </div>
             </div>
@@ -203,6 +204,7 @@
         console.log('registration', @json($errors->register->all()));
         window.addEventListener('DOMContentLoaded', evt => {
             $('#auth-modal').modal();
+            $('#modal-register').trigger('click');
         });
     </script>
 @endif
