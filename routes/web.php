@@ -20,3 +20,13 @@ Route::name('visitors.')->group(function () {
  * Admin pages
  */
 Route::view('/admin', 'admin.index');
+
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('me', function () {
+            return response()->json([
+                'user' => Auth::user()
+            ]);
+        });
+    });
+});

@@ -1,4 +1,6 @@
 const mix = require('laravel-mix');
+const dotenv = require('dotenv')
+
 
 /*
  |--------------------------------------------------------------------------
@@ -14,7 +16,7 @@ const mix = require('laravel-mix');
 /**
  * For admin module
  */
-mix.react('resources/js/admin/app.js', 'public/js/admin')
+mix.react('resources/js/admin/index.js', 'public/js/admin')
     .sass('resources/sass/admin/app.scss', 'public/css/admin');
 
 /**
@@ -22,3 +24,15 @@ mix.react('resources/js/admin/app.js', 'public/js/admin')
  */
 mix.js('resources/js/visitors/app.js', 'public/js/visitors')
     .sass('resources/sass/visitors/app.scss', 'public/css/visitors/');
+
+
+
+mix.webpackConfig(webpack => {
+    const env = dotenv.config().parsed
+    const envKeys = Object.keys(env).reduce((prev, next) => {
+        prev[`process.env.${next}`] = JSON.stringify(env[next])
+        return prev
+    }, {})
+
+    return {plugins: [new webpack.DefinePlugin(envKeys)]}
+})
