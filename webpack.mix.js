@@ -25,8 +25,14 @@ mix.react('resources/js/admin/index.js', 'public/js/admin')
 mix.js('resources/js/visitors/app.js', 'public/js/visitors')
     .sass('resources/sass/visitors/app.scss', 'public/css/visitors/');
 
+/**
+ * For all
+ */
+mix.sass('resources/sass/common/common.scss', 'public/css/common')
 
 
+
+/** Setup .env file for js */
 mix.webpackConfig(webpack => {
     const env = dotenv.config().parsed
     const envKeys = Object.keys(env).reduce((prev, next) => {

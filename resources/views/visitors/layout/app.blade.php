@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/visitors/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/common/common.css') }}">
     <script src="{{ asset('/js/visitors/app.js') }}" defer></script>
     {{-- Render Re-capture --}}
     <script>

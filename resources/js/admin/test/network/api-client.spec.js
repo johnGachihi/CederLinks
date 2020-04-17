@@ -40,6 +40,7 @@ describe('fetch response has status 401', () => {
 
     test('should cause redirect to auth-modal in visitors module', () => {
         // sinon.stub(window.location, 'assign')
+        //////// LEFT OFF HERE !!!!!
         return client('whatever').then(data => {
             expect(window.location.assign).toBeCalledWith(`http://localhost/`)
         })

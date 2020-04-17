@@ -22163,6 +22163,17 @@ window.gcaptcha = {
 
 /***/ }),
 
+/***/ "./resources/sass/common/common.scss":
+/*!*******************************************!*\
+  !*** ./resources/sass/common/common.scss ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/visitors/app.scss":
 /*!******************************************!*\
   !*** ./resources/sass/visitors/app.scss ***!
@@ -22175,15 +22186,16 @@ window.gcaptcha = {
 /***/ }),
 
 /***/ 0:
-/*!***************************************************************************************************************!*\
-  !*** multi ./resources/js/visitors/app.js ./resources/sass/admin/app.scss ./resources/sass/visitors/app.scss ***!
-  \***************************************************************************************************************/
+/*!***************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/visitors/app.js ./resources/sass/admin/app.scss ./resources/sass/visitors/app.scss ./resources/sass/common/common.scss ***!
+  \***************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /var/www/html/CederLinks/resources/js/visitors/app.js */"./resources/js/visitors/app.js");
 __webpack_require__(/*! /var/www/html/CederLinks/resources/sass/admin/app.scss */"./resources/sass/admin/app.scss");
-module.exports = __webpack_require__(/*! /var/www/html/CederLinks/resources/sass/visitors/app.scss */"./resources/sass/visitors/app.scss");
+__webpack_require__(/*! /var/www/html/CederLinks/resources/sass/visitors/app.scss */"./resources/sass/visitors/app.scss");
+module.exports = __webpack_require__(/*! /var/www/html/CederLinks/resources/sass/common/common.scss */"./resources/sass/common/common.scss");
 
 
 /***/ })

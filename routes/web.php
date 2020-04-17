@@ -19,10 +19,11 @@ Route::name('visitors.')->group(function () {
 /**
  * Admin pages
  */
-Route::view('/admin', 'admin.index');
 
-Route::middleware(['auth'])->group(function () {
+
+Route::middleware(['admin'])->group(function () {
     Route::prefix('admin')->group(function () {
+        Route::view('/', 'admin.index')->name('admin.index');
         Route::get('me', function () {
             return response()->json([
                 'user' => Auth::user()

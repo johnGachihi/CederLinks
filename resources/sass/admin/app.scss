@@ -1,9 +1,12 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+//@import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
 @import 'variables';
 
 // Bootstrap
-@import '../../../node_modules/bootstrap/scss/bootstrap';
-@import "../../../node_modules/bootstrap/scss/variables";
+//@import '../../../node_modules/bootstrap/scss/bootstrap';
+//@import "../../../node_modules/bootstrap/scss/variables";
+
+@import "../common/common";
+@import "navbar";
