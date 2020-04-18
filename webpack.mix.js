@@ -17,7 +17,11 @@ const dotenv = require('dotenv')
  * For admin module
  */
 mix.react('resources/js/admin/index.js', 'public/js/admin')
-    .sass('resources/sass/admin/app.scss', 'public/css/admin');
+    .sass('resources/sass/admin/app.scss', 'public/css/admin', {
+        sassOptions: {
+            includePaths: [path.resolve(__dirname, 'node_modules')]
+        }
+    });
 
 /**
  * For visitors module
