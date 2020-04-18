@@ -1,0 +1,14 @@
+._toolbar_ {
+    min-height: 50px;
+    border-bottom: 1px solid #cecece;
+    padding: 10px;
+    position: sticky;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    > .left {
+        grid-column: 1;
+    }
+    > .right {
+        grid-column: 2;
+    }
+}

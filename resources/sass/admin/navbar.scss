@@ -1,0 +1,13 @@
+.navbar .navbar-nav > .nav-item > .nav-link {
+    font-size: 15px;
+}
+
+._navbar_ {
+    @extend .navbar;
+    @extend .navbar-expand-lg;
+    @extend .px-md-0;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    .navbar-brand {
+        color: #000;
+    }
+}
