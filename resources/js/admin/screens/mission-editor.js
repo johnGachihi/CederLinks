@@ -25,7 +25,11 @@ function MissionEditor() {
                 </div>
                 <div className="row">
                     <div className="col-md-8 mx-auto">
-                        <TextField onTextChange={(text) => console.log(text)}/>
+                        <TextField
+                            onTextChange={(text) => console.log(text)}
+                            placeholder="Mission title"
+                            inputClasses="mission-title-input"
+                        />
                     </div>
                 </div>
                 <div className="row">

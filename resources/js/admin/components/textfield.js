@@ -11,17 +11,15 @@ function TextField(props) {
     return (
         <label
             ref={textField}
-            className="mdc-text-field mdc-text-field--outlined mdc-text-field--fullwidth"
+            className="mdc-text-field mdc-text-field--filled mdc-text-field--fullwidth"
         >
-            <div className="mdc-text-field__ripple"></div>
-            <input
-                className="mdc-text-field__input"
-                type="text"
-                aria-labelledby="my-label-id"
-                onChange={(e) => props.onTextChange(e.target.value)}
-            />
-            <span className="mdc-floating-label" id="my-label-id">Mission Title</span>
-            <div className="mdc-line-ripple"></div>
+            <span className="mdc-text-field__ripple"></span>
+            <input className={"mdc-text-field__input " + props.inputClasses}
+                   type="text"
+                   placeholder={props.placeholder}
+                   aria-label="Full-Width Text Field"
+                   onChange={(e) => props.onTextChange(e.target.value)}/>
+            <span className="mdc-line-ripple"></span>
         </label>
     )
 }

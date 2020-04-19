@@ -1,19 +1,23 @@
+// Overriding global MDC theme
 @use "~@material/theme" with (
     $primary: #afa939
+);
+
+// Overriding global MDC font-family
+@use "~@material/typography" with (
+    $font-family: unquote("Poppins, Arial, sans-serif")
 );
 
 // Variables
 @import 'variables';
 
-// Bootstrap
-//@import '../../../node_modules/bootstrap/scss/bootstrap';
-//@import "../../../node_modules/bootstrap/scss/variables";
-
 @import "../common/common";
+
+// Components
 @import "navbar";
 @import "toolbar";
 @import "action-button";
 @import "textfield";
 
-// Look into this
-@import "missions";
+// Screens
+@import "mission-editor";

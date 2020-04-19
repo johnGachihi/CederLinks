@@ -117732,20 +117732,18 @@ function TextField(props) {
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     ref: textField,
-    className: "mdc-text-field mdc-text-field--outlined mdc-text-field--fullwidth"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mdc-text-field mdc-text-field--filled mdc-text-field--fullwidth"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "mdc-text-field__ripple"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    className: "mdc-text-field__input",
+    className: "mdc-text-field__input " + props.inputClasses,
     type: "text",
-    "aria-labelledby": "my-label-id",
+    placeholder: props.placeholder,
+    "aria-label": "Full-Width Text Field",
     onChange: function onChange(e) {
       return props.onTextChange(e.target.value);
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "mdc-floating-label",
-    id: "my-label-id"
-  }, "Mission Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "mdc-line-ripple"
   }));
 }
@@ -117934,7 +117932,9 @@ function MissionEditor() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_textfield__WEBPACK_IMPORTED_MODULE_5__["default"], {
     onTextChange: function onTextChange(text) {
       return console.log(text);
-    }
+    },
+    placeholder: "Mission title",
+    inputClasses: "mission-title-input"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
