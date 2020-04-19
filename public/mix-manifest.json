@@ -1,7 +1,7 @@
 {
     "/js/admin/index.js": "/js/admin/index.js",
     "/js/visitors/app.js": "/js/visitors/app.js",
+    "/css/admin/app.css": "/css/admin/app.css",
     "/css/visitors/app.css": "/css/visitors/app.css",
-    "/css/common/common.css": "/css/common/common.css",
-    "/css/admin/app.css": "/css/admin/app.css"
+    "/css/common/common.css": "/css/common/common.css"
 }

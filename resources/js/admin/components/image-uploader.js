@@ -1,9 +1,9 @@
-import React, {createRef, useEffect, useState} from 'react'
+import React, {useRef, useEffect, useState} from 'react'
 import defaultImage from "../../assets/images/philippe-unsplash.jpg";
 
 function ImageUploader(props) {
-    const imageInput = createRef()
-    const imageEl = createRef()
+    const imageInput = useRef(null)
+    const imageEl = useRef(null)
     const [image, setImage] = useState(null)
 
     useEffect(() => {

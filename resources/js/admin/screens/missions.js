@@ -11,7 +11,11 @@ function Missions() {
             <Navbar/>
             <div className="container">
                 <div className="_toolbar_">
-                    <IconActionButton icomoonIcon="icon-plus" label="Add Mission"/>
+                    <IconActionButton
+                        icomoonIcon="icon-plus"
+                        label="Add Mission"
+                        onClick={() => history.push('/make-mission')}
+                    />
                 </div>
             </div>
         </div>

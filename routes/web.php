@@ -24,7 +24,7 @@ Route::name('visitors.')->group(function () {
 Route::middleware(['admin'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::view('/', 'admin.index')->name('admin.index');
-        Route::view('/make-mission', 'admin.index')->name('admin.index');
+        Route::view('/make-mission', 'admin.index');
         Route::get('me', function () {
             return response()->json([
                 'user' => Auth::user()

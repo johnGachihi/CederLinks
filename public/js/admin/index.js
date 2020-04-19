@@ -72934,13 +72934,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _action_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./action-button */ "./resources/js/admin/components/action-button.js");
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
 
 
 
-function IconActionButton(_ref) {
-  var icomoonIcon = _ref.icomoonIcon,
-      label = _ref.label;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_action_button__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+
+function IconActionButton(props) {
+  var icomoonIcon = props.icomoonIcon,
+      label = props.label,
+      others = _objectWithoutProperties(props, ["icomoonIcon", "label"]);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_action_button__WEBPACK_IMPORTED_MODULE_1__["default"], others, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: icomoonIcon
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
@@ -73028,8 +73066,8 @@ function _arrayWithHoles(arr) {
 
 
 function ImageUploader(props) {
-  var imageInput = Object(react__WEBPACK_IMPORTED_MODULE_0__["createRef"])();
-  var imageEl = Object(react__WEBPACK_IMPORTED_MODULE_0__["createRef"])();
+  var imageInput = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  var imageEl = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
       _useState2 = _slicedToArray(_useState, 2),
@@ -73286,64 +73324,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_images_philippe_unsplash_jpg__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_assets_images_philippe_unsplash_jpg__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_tooltip__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-tooltip */ "./node_modules/react-tooltip/dist/index.es.js");
 /* harmony import */ var _components_image_uploader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/image-uploader */ "./resources/js/admin/components/image-uploader.js");
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
-
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(n);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
-
-  return arr2;
-}
-
-function _iterableToArrayLimit(arr, i) {
-  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-  var _e = undefined;
-
-  try {
-    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-
-  return _arr;
-}
-
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-
 
 
 
@@ -73352,30 +73332,6 @@ function _arrayWithHoles(arr) {
 
 
 function MissionEditor() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
-      _useState2 = _slicedToArray(_useState, 2),
-      image = _useState2[0],
-      setMissionImage = _useState2[1];
-
-  var imageInput = Object(react__WEBPACK_IMPORTED_MODULE_0__["createRef"])();
-  var imageEl = Object(react__WEBPACK_IMPORTED_MODULE_0__["createRef"])();
-
-  function handleMissionImageChange(e) {
-    var file = e.target.files[0];
-    setMissionImage(file);
-  }
-
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    if (image) {
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        return imageEl.current.src = e.target.result;
-      };
-
-      reader.readAsDataURL(image);
-    }
-  }, [image]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_navbar__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -73428,7 +73384,10 @@ function Missions() {
     className: "_toolbar_"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_icon_action_button__WEBPACK_IMPORTED_MODULE_4__["default"], {
     icomoonIcon: "icon-plus",
-    label: "Add Mission"
+    label: "Add Mission",
+    onClick: function onClick() {
+      return history.push('/make-mission');
+    }
   }))));
 }
 

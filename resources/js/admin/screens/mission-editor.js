@@ -8,23 +8,6 @@ import ImageUploader from "../components/image-uploader";
 
 
 function MissionEditor() {
-    const [image, setMissionImage] = useState(null)
-    const imageInput = createRef()
-    const imageEl = createRef()
-
-    function handleMissionImageChange(e) {
-        const file = e.target.files[0];
-        setMissionImage(file)
-    }
-
-    useEffect(() => {
-        if (image) {
-            const reader = new FileReader();
-            reader.onload = e => imageEl.current.src = e.target.result;
-            reader.readAsDataURL(image)
-        }
-    }, [image])
-
     return (
         <div>
             <Navbar/>
