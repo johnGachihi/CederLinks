@@ -1,0 +1,6 @@
+@use "~@material/textfield/mdc-text-field";
+@use "~@material/textfield/_index" as textfield;
+
+.mdc-text-field {
+    @include textfield.line-ripple-color(#afa939)
+}

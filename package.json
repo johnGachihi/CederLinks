@@ -38,6 +38,8 @@
     },
     "dependencies": {
         "@material/elevation": "^5.1.0",
+        "@material/textfield": "^5.1.0",
+        "@material/theme": "^5.1.0",
         "aos": "^2.3.4",
         "jquery-migrate": "^3.1.0",
         "jquery.stellar": "^0.6.2",

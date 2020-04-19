@@ -4,6 +4,7 @@ import IconActionButton from "../components/icon-action-button";
 import defaultImage from "../../assets/images/philippe-unsplash.jpg"
 import ReactTooltip from "react-tooltip";
 import ImageUploader from "../components/image-uploader";
+import TextField from "../components/textfield";
 
 
 
@@ -22,6 +23,11 @@ function MissionEditor() {
                             onImageChange={() => console.log("mission-editor -- image change")}
                             cssClass="image-uploader"
                         />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-8 mx-auto">
+                        <TextField onTextChange={(text) => console.log(text)}/>
                     </div>
                 </div>
             </div>
