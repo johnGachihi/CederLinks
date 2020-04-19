@@ -1,5 +1,6 @@
 import React, {useRef, useEffect, useState} from 'react'
 import defaultImage from "../../assets/images/philippe-unsplash.jpg";
+import ReactTooltip from "react-tooltip"
 
 function ImageUploader(props) {
     const imageInput = useRef(null)
@@ -41,6 +42,7 @@ function ImageUploader(props) {
                 style={{display: 'none'}}
                 onChange={handleImageChange}
             />
+            <ReactTooltip place="bottom" type="dark" effect="solid" delayShow={700}/>
         </div>
     )
 }

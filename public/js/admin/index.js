@@ -117531,6 +117531,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _assets_images_philippe_unsplash_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/images/philippe-unsplash.jpg */ "./resources/js/assets/images/philippe-unsplash.jpg");
 /* harmony import */ var _assets_images_philippe_unsplash_jpg__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_assets_images_philippe_unsplash_jpg__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_tooltip__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-tooltip */ "./node_modules/react-tooltip/dist/index.es.js");
 function _slicedToArray(arr, i) {
   return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
 }
@@ -117592,6 +117593,7 @@ function _arrayWithHoles(arr) {
 
 
 
+
 function ImageUploader(props) {
   var imageInput = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
   var imageEl = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
@@ -117645,6 +117647,11 @@ function ImageUploader(props) {
       display: 'none'
     },
     onChange: handleImageChange
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_tooltip__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    place: "bottom",
+    type: "dark",
+    effect: "solid",
+    delayShow: 700
   }));
 }
 
