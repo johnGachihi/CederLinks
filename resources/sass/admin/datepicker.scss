@@ -1,0 +1,21 @@
+.SingleDatePicker {
+    width: 50%;
+    @media (max-width: 530px) {
+        width: 100%;
+    }
+
+    > .SingleDatePickerInput {
+        display: flex;
+        border: none;
+        border-bottom: 1px solid #949494;
+
+        > .DateInput {
+            flex-grow: 1;
+
+            > .DateInput_input {
+                font-weight: 400;
+                font-size: 16px;
+            }
+        }
+    }
+}

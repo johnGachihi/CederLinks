@@ -1,12 +1,10 @@
-import React, {useState, createRef, useEffect} from 'react'
+import React from 'react'
 import Navbar from "../components/navbar";
 import IconActionButton from "../components/icon-action-button";
-import defaultImage from "../../assets/images/philippe-unsplash.jpg"
 import ReactTooltip from "react-tooltip";
 import ImageUploader from "../components/image-uploader";
 import TextField from "../components/textfield";
-
-
+import DatePicker from "../components/datepicker"
 
 function MissionEditor() {
     return (
@@ -28,6 +26,14 @@ function MissionEditor() {
                 <div className="row">
                     <div className="col-md-8 mx-auto">
                         <TextField onTextChange={(text) => console.log(text)}/>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-8 mx-auto">
+                        <DatePicker
+                            placeholder={"Mission date"}
+                            onDateChange={date => console.log(date)}
+                        />
                     </div>
                 </div>
             </div>

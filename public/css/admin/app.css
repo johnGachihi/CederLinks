@@ -28688,7 +28688,7 @@ img.object-fit-cover {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  z-index: 1020;
+  z-index: 1;
   background-color: #fff;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
