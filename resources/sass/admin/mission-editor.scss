@@ -1,3 +1,7 @@
+body {
+    color: #212529;
+}
+
 .image-uploader {
     height: 270px;
 }
@@ -5,4 +9,15 @@
 .mission-title-input {
     font-size: 20px;
     text-align: center;
+}
+
+// CKEditor
+.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {
+    height: 75vh;
+    &.ck-focused {
+        border: 2px solid #afa939;
+    }
+    &.ck-blurred {
+        border: 1px solid #949494;
+    }
 }

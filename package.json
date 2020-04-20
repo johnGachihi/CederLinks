@@ -38,6 +38,8 @@
     },
     "dependencies": {
         "@babel/runtime": "^7.9.2",
+        "@ckeditor/ckeditor5-build-balloon-block": "^18.0.0",
+        "@ckeditor/ckeditor5-react": "^2.1.0",
         "@material/elevation": "^5.1.0",
         "@material/textfield": "^5.1.0",
         "@material/theme": "^5.1.0",
