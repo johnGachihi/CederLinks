@@ -28690,16 +28690,6 @@ img.object-fit-cover {
   top: 0;
   z-index: 1;
   background-color: #fff;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
-
-._toolbar_ > .left {
-  grid-column: 1;
-}
-
-._toolbar_ > .right {
-  grid-column: 2;
 }
 
 ._action-button_ {
@@ -30876,30 +30866,5 @@ img.object-fit-cover {
 
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
   border-bottom-color: #afa939;
-}
-
-body {
-  color: #212529;
-}
-
-.image-uploader {
-  height: 270px;
-}
-
-.mission-title-input {
-  font-size: 20px;
-  text-align: center;
-}
-
-.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {
-  height: 75vh;
-}
-
-.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-focused {
-  border: 2px solid #afa939;
-}
-
-.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred {
-  border: 1px solid #949494;
 }
 

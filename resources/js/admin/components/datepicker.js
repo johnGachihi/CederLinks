@@ -5,7 +5,7 @@ import 'react-dates/lib/css/_datepicker.css'
 import '../../../sass/admin/datepicker.scss'
 
 function DatePicker(props) {
-    const [date, setDate] = useState(null)
+    const [date, setDate] = useState(props.date)
     const [focused, setFocus] = useState(false)
 
     let numberOfMonths = 1

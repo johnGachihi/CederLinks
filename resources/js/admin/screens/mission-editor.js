@@ -1,16 +1,46 @@
-import React, {useRef, useState} from 'react'
+import React, {useState, useCallback} from 'react'
+import {useParams} from 'react-router-dom'
+import "../../../sass/admin/mission-editor.scss"
 import Navbar from "../components/navbar";
 import IconActionButton from "../components/icon-action-button";
-import ReactTooltip from "react-tooltip";
 import ImageUploader from "../components/image-uploader";
 import TextField from "../components/textfield";
 import DatePicker from "../components/datepicker"
 import CKEditor from "@ckeditor/ckeditor5-react"
 import BalloonBlockEditor from "@ckeditor/ckeditor5-build-balloon-block"
+import {BeatLoader} from "react-spinners";
+import {useMission, useUpdateMission} from "../utils/mission";
 
 function MissionEditor() {
-    let editor = useRef(null)
+    const {missionId} = useParams('id')
+    const mission = useMission(missionId)
+    const [mutate, {status}] = useUpdateMission()
+    console.log('mission', mission)
+    console.log('load status:', status)
+
+    let [image, setImage] = useState(mission.image)
+    let [title, setTitle] = useState(mission.title)
+    let [date, setDate] = useState(mission.date)
+    let [description, setDescription] = useState(mission.description)
     let [editorError, setEditorError] = useState(null)
+
+    async function saveMission() {
+        const form = new FormData()
+        form.set('image', image)
+        form.set('title', title)
+        form.set('date', date)
+        form.set('description', description)
+
+        try {
+            const data = await mutate({id: mission.id, data: form})
+            console.log(data)
+            console.log('aldskfjkalsdfhkjldfhkjalfkjjfnjn')
+        } catch (e) {
+            console.log(e)
+            console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
+        }
+
+    }
 
     if (editorError)
         return 'Error loading editor';
@@ -21,16 +51,17 @@ function MissionEditor() {
             <div className="container">
                 <div className="_toolbar_">
                     <IconActionButton
-                        onClick={() => console.log(editor.current.getData())}
+                        onClick={saveMission}
                         icomoonIcon="icon-save"
                         label="Save"
                     />
+                    <BeatLoader loading={status === 'loading'} color="#afa939"/>
                 </div>
 
                 <div className="row">
                     <div className="col-lg-4 col-md-6 mx-auto my-4">
                         <ImageUploader
-                            onImageChange={() => console.log("mission-editor -- image change")}
+                            onImageChange={setImage}
                             cssClass="image-uploader"
                         />
                     </div>
@@ -38,9 +69,10 @@ function MissionEditor() {
                 <div className="row">
                     <div className="col-md-8 mx-auto">
                         <TextField
-                            onTextChange={(text) => console.log(text)}
+                            onTextChange={setTitle}
                             placeholder="Mission title"
                             inputClasses="mission-title-input"
+                            value={title ?? ""}
                         />
                     </div>
                 </div>
@@ -48,17 +80,20 @@ function MissionEditor() {
                     <div className="col-md-8 mx-auto">
                         <DatePicker
                             placeholder={"Mission date"}
-                            onDateChange={date => console.log(date)}
+                            // date={state.date.value}
+                            onDateChange={setDate}
                         />
                     </div>
                 </div>
-                <div className="row" style={{marginTop: '40px'}}>
+                <div className="row" style={{marginTop: '40px', marginBottom: '40px'}}>
                     <div className="col-md-8 mx-auto">
                         <CKEditor
                             editor={BalloonBlockEditor}
                             config={editorConfig}
-                            onInit={_editor => editor.current = _editor}
                             onError={error => setEditorError(error)}
+                            onChange={(event, editor) => {
+                                setDescription(editor.getData())
+                            }}
                         />
                     </div>
                 </div>

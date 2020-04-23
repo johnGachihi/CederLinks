@@ -7,12 +7,12 @@
     top: 0;
     z-index: 1;
     background-color: #fff;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    > .left {
-        grid-column: 1;
-    }
-    > .right {
-        grid-column: 2;
-    }
+    //display: grid;
+    //grid-template-columns: repeat(2, 1fr);
+    //> .left {
+    //    grid-column: 1;
+    //}
+    //> .right {
+    //    grid-column: 2;
+    //}
 }

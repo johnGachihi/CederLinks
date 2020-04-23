@@ -11,12 +11,29 @@ body {
     text-align: center;
 }
 
+._toolbar_ {
+    display: flex;
+    align-items: center;
+
+    > * {
+        margin-right: 20px;
+    }
+}
+
+.invalid-message {
+    font-size: 13px;
+    color: red;
+    margin-bottom: 11px;
+}
+
 // CKEditor
 .ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {
     height: 75vh;
+
     &.ck-focused {
         border: 2px solid #afa939;
     }
+
     &.ck-blurred {
         border: 1px solid #949494;
     }

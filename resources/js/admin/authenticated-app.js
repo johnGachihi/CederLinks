@@ -7,7 +7,7 @@ function AuthenticatedApp() {
     return (
         <Router basename="admin">
             <Switch>
-                <Route path="/make-mission" children={<MissionEditor/>}/>
+                <Route path="/make-mission/:missionId" children={<MissionEditor/>}/>
                 <Route path="/" children={<Missions/>}/>
             </Switch>
         </Router>

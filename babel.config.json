@@ -1,5 +1,6 @@
 {
     "presets": ["@babel/preset-env"],
+    "plugins": ["emotion"],
     "env": {
         "test": {
             "plugins": ["@babel/plugin-transform-runtime"]

@@ -18,7 +18,9 @@ function TextField(props) {
                    type="text"
                    placeholder={props.placeholder}
                    aria-label="Full-Width Text Field"
-                   onChange={(e) => props.onTextChange(e.target.value)}/>
+                   onChange={(e) => props.onTextChange(e.target.value)}
+                   value={props.value}
+            />
             <span className="mdc-line-ripple"></span>
         </label>
     )

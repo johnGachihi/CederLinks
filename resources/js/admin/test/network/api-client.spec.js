@@ -82,11 +82,18 @@ describe('test client calls window.fetch with correct arguments', () => {
         })
     })
 
-    test('body', () => {
+    test('body is stringified when object provided as data', () => {
         const body = {body: 'data'}
         return client('whatever', body).then(() => {
             expect(fetch.mock.calls[0][1]).toMatchObject(
                 {body: JSON.stringify(body)})
+        })
+    })
+
+    test('body is FormData when FormData provided as data', () => {
+        const body = new FormData()
+        return client('whatever', body).then(() => {
+            expect(fetchMock.mock.calls[0][1].body).toBeInstanceOf(FormData)
         })
     })
 })

@@ -24,11 +24,14 @@ Route::name('visitors.')->group(function () {
 Route::middleware(['admin'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::view('/', 'admin.index')->name('admin.index');
-        Route::view('/make-mission', 'admin.index');
+        Route::view('/make-mission/{id}', 'admin.index');
         Route::get('me', function () {
             return response()->json([
                 'user' => Auth::user()
             ]);
         });
+        Route::post('/mission', 'MissionController@create');
+        Route::get('/mission/{id?}', 'MissionController@read');
+        Route::put('/mission/{id}', 'MissionController@update');
     });
 });

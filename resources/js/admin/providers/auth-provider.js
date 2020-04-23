@@ -1,8 +1,11 @@
 import React from 'react'
 import useAsync from "../utils/use-async";
 import * as authClient from '../../network/auth-client'
+import bootstrapAppData from '../utils/bootstrap'
 
 const AuthContext = React.createContext()
+
+const appDataPromise = bootstrapAppData()
 
 function AuthProvider(props) {
     const {
@@ -17,7 +20,8 @@ function AuthProvider(props) {
     } = useAsync()
 
     React.useLayoutEffect(() => {
-        run(authClient.getUser())
+        // run(authClient.getUser())
+        run(appDataPromise)
     }, [run])
 
     const logout = React.useCallback(() => {
@@ -25,11 +29,12 @@ function AuthProvider(props) {
         setData(null)
     }, [setData])
 
-    const user = data
+    const user = data?.user
 
-    const contextValue = React.useMemo(() => ({user, logout}), [
-        user, logout
-    ])
+    const contextValue = React.useMemo(
+        () => ({user, logout}),
+        [user, logout]
+    )
 
     if (isLoading || isIdle)
         return <div>Loading</div>
