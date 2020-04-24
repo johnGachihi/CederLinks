@@ -66,18 +66,29 @@ describe('test client calls window.fetch with correct arguments', () => {
         })
     })
 
-    test('headers', () => {
+    test('config headers', () => {
         getCsrfToken.mockReturnValue('qwerty123456')
 
-        const headers = {header: 'header'};
-        return client('whatever', null, headers).then(() => {
+        const config = {headers: {header: 'header'}};
+        return client('whatever', null, config).then(() => {
             expect(fetch.mock.calls[0][1]).toMatchObject({
                 headers: {
                     'X-CSRF-TOKEN': 'qwerty123456',
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
-                    ...headers
+                    'header': 'header'
                 }
+            })
+        })
+    })
+
+    test('config method', () => {
+        getCsrfToken.mockReturnValue('qwerty123456')
+
+        const config = {method: 'PUT'};
+        return client('whatever', null, config).then(() => {
+            expect(fetch.mock.calls[0][1]).toMatchObject({
+                method: 'PUT'
             })
         })
     })

@@ -1,28 +1,33 @@
 import {getCsrfToken} from "../utils/csrf";
 
-function client(endpoint, data, headers, config) {
-    const options = {};
-    options.headers = {
+function client(endpoint, data, customConfig = {}) {
+    const headers = {
         'X-CSRF-TOKEN': getCsrfToken(),
-        'Content-Type': 'application/json',
         'Accept': 'application/json',
-        ...headers
     };
 
+    const options = {
+        method: data ? 'POST' : 'GET',
+        ...customConfig,
+        headers: {
+            ...headers,
+            ...customConfig.headers
+        }
+    }
+
     if (data) {
-        options.method = 'POST'
         if (data instanceof FormData)
             options.body = data
         else
             options.body = JSON.stringify(data);
     }
 
-    const _options = {
-        ...options,
-        ...config
-    }
+    // const _options = {
+    //     ...options,
+    //     ...customConfig
+    // }
 
-    return window.fetch(`${process.env.REACT_APP_API_URL}/${endpoint}`, _options)
+    return window.fetch(`${process.env.REACT_APP_API_URL}/${endpoint}`, options)
         .then(async res => {
             if (res.status === 401) {
                 redirectToLogin()

@@ -5,7 +5,6 @@ import 'react-dates/lib/css/_datepicker.css'
 import '../../../sass/admin/datepicker.scss'
 
 function DatePicker(props) {
-    const [date, setDate] = useState(props.date)
     const [focused, setFocus] = useState(false)
 
     let numberOfMonths = 1
@@ -15,19 +14,14 @@ function DatePicker(props) {
         numberOfMonths = 2
     }
 
-    function handleDateChange(date) {
-        setDate(date)
-        props.onDateChange(date)
-    }
-
     return (
         <SingleDatePicker
             placeholder={props.placeholder}
-            date={date}
-            onDateChange={handleDateChange}
+            date={props.date}
+            onDateChange={props.onDateChange}
             focused={focused}
             onFocusChange={focused => setFocus(focused.focused)}
-            id={"theid12"}
+            id={"missionDateDatepicker"}
             displayFormat={'Do MMMM YYYY'}
             withPortal
             numberOfMonths={numberOfMonths}

@@ -7,12 +7,7 @@ function useMission(missionId) {
         queryFn: getMission
     })
 
-    return data ?? {
-        title: null,
-        image: null,
-        date: null,
-        description: null
-    }
+    return [data, status]
 }
 
 function getMission(queryKey, {missionId}) {
@@ -23,7 +18,7 @@ function useCreateMission() {
     return useMutation(
         missionClient.create,
         {
-            onSettled: () => queryCache.refetchQueries('missions'),
+            onSettled: () => {queryCache.refetchQueries('missions')},
             useErrorBoundary: false,
             throwOnError: true
         })

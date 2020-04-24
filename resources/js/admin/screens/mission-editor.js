@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react'
+import React, {useState, useReducer, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import "../../../sass/admin/mission-editor.scss"
 import Navbar from "../components/navbar";
@@ -10,40 +10,39 @@ import CKEditor from "@ckeditor/ckeditor5-react"
 import BalloonBlockEditor from "@ckeditor/ckeditor5-build-balloon-block"
 import {BeatLoader} from "react-spinners";
 import {useMission, useUpdateMission} from "../utils/mission";
+import moment from "moment";
 
 function MissionEditor() {
     const {missionId} = useParams('id')
-    const mission = useMission(missionId)
+    const [mission, missionStatus] = useMission(missionId)
     const [mutate, {status}] = useUpdateMission()
-    console.log('mission', mission)
-    console.log('load status:', status)
+    const [editorError, setEditorError] = useState(null)
+    const [inputs, setInputs] = useReducer(
+        (s, a) => ({...s, ...a}), {})
 
-    let [image, setImage] = useState(mission.image)
-    let [title, setTitle] = useState(mission.title)
-    let [date, setDate] = useState(mission.date)
-    let [description, setDescription] = useState(mission.description)
-    let [editorError, setEditorError] = useState(null)
+    useEffect(() => setInputs(mission), [missionStatus])
+
 
     async function saveMission() {
         const form = new FormData()
-        form.set('image', image)
-        form.set('title', title)
-        form.set('date', date)
-        form.set('description', description)
+        form.set('image', inputs.image ?? '')
+        form.set('title', inputs.title ?? '')
+        form.set('date', inputs.date ?? '')
+        form.set('description', inputs.description ?? '')
 
         try {
-            const data = await mutate({id: mission.id, data: form})
-            console.log(data)
-            console.log('aldskfjkalsdfhkjldfhkjalfkjjfnjn')
+            await mutate({id: mission.id, data: form})
         } catch (e) {
-            console.log(e)
-            console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
+            // Save request not successful
+            // Tell users there's an error
         }
-
     }
 
     if (editorError)
         return 'Error loading editor';
+
+    if (missionStatus === 'loading')
+        return 'Loading :/'
 
     return (
         <div>
@@ -61,7 +60,11 @@ function MissionEditor() {
                 <div className="row">
                     <div className="col-lg-4 col-md-6 mx-auto my-4">
                         <ImageUploader
-                            onImageChange={setImage}
+                            image={typeof inputs.image === 'string'
+                                ? `${process.env.IMAGES_URL}/${inputs.image}`
+                                : inputs.image
+                            }
+                            onImageChange={image => setInputs({image})}
                             cssClass="image-uploader"
                         />
                     </div>
@@ -69,10 +72,10 @@ function MissionEditor() {
                 <div className="row">
                     <div className="col-md-8 mx-auto">
                         <TextField
-                            onTextChange={setTitle}
+                            onTextChange={title => setInputs({title})}
                             placeholder="Mission title"
                             inputClasses="mission-title-input"
-                            value={title ?? ""}
+                            value={inputs.title ?? ""}
                         />
                     </div>
                 </div>
@@ -80,8 +83,8 @@ function MissionEditor() {
                     <div className="col-md-8 mx-auto">
                         <DatePicker
                             placeholder={"Mission date"}
-                            // date={state.date.value}
-                            onDateChange={setDate}
+                            date={inputs.date ? moment(inputs.date) : null}
+                            onDateChange={date => setInputs({date})}
                         />
                     </div>
                 </div>
@@ -90,9 +93,13 @@ function MissionEditor() {
                         <CKEditor
                             editor={BalloonBlockEditor}
                             config={editorConfig}
+                            onInit={editor => {
+                                if (inputs.description)
+                                    editor.setData(inputs.description)
+                            }}
                             onError={error => setEditorError(error)}
                             onChange={(event, editor) => {
-                                setDescription(editor.getData())
+                                setInputs({description: editor.getData()})
                             }}
                         />
                     </div>

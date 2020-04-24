@@ -1,24 +1,26 @@
-import React, {useRef, useEffect, useState} from 'react'
-import defaultImage from "../../assets/images/philippe-unsplash.jpg";
+import React, {useRef, useEffect} from 'react'
+import defaultImage from "../../assets/images/philippe-unsplash.jpg"
 import ReactTooltip from "react-tooltip"
 
 function ImageUploader(props) {
     const imageInput = useRef(null)
     const imageEl = useRef(null)
-    const [image, setImage] = useState(null)
 
     useEffect(() => {
-        if (image) {
-            const reader = new FileReader();
-            reader.onload = e => imageEl.current.src = e.target.result;
-            reader.readAsDataURL(image)
+        if (props.image) {
+            if (props.image instanceof File) {
+                const reader = new FileReader();
+                reader.onload = e => imageEl.current.src = e.target.result;
+                reader.readAsDataURL(props.image)
+            } else {
+                console.log(typeof props.image)
+            }
         }
-    }, [image])
+    }, [props.image])
 
     function handleImageChange(e) {
         const file = e.target.files[0]
         if (file) {
-            setImage(file)
             props.onImageChange(file)
         }
     }
@@ -28,7 +30,7 @@ function ImageUploader(props) {
             <img
                 width="100%"
                 height="100%"
-                src={defaultImage}
+                src={props.image ?? defaultImage}
                 onClick={() => imageInput.current.click()}
                 data-tip="Click to change image"
                 ref={imageEl}

@@ -1,7 +1,7 @@
 import client from "./api-client";
 
 function create() {
-    return client('admin/mission', {}, {method: 'POST'})
+    return client('admin/mission', {})
 }
 
 function read(id) {
@@ -13,7 +13,7 @@ function readAll() {
 }
 
 function update(id, form) {
-    return client(`admin/mission/${id}`, form, {}, {method: 'PUT'})
+    return client(`admin/mission/${id}`, form)
 }
 
 export {create, read, update, readAll}
