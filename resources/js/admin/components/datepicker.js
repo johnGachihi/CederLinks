@@ -8,9 +8,9 @@ function DatePicker(props) {
     const [focused, setFocus] = useState(false)
 
     let numberOfMonths = 1
-    if (window.matchMedia('(min-width: 935px').matches) {
+    if (window.matchMedia('(min-width: 935px)').matches) {
         numberOfMonths = 3
-    } else if (window.matchMedia('(min-width: 640px').matches) {
+    } else if (window.matchMedia('(min-width: 640px)').matches) {
         numberOfMonths = 2
     }
 
