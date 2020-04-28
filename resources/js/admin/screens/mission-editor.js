@@ -11,30 +11,43 @@ import BalloonBlockEditor from "@ckeditor/ckeditor5-build-balloon-block"
 import {BeatLoader} from "react-spinners";
 import {useMission, useUpdateMission} from "../utils/mission";
 import moment from "moment";
+import Alert from "../components/alert";
+import '../../../sass/admin/snackbar.scss'
 
 function MissionEditor() {
     const {missionId} = useParams('id')
     const [mission, missionStatus] = useMission(missionId)
     const [mutate, {status}] = useUpdateMission()
     const [editorError, setEditorError] = useState(null)
+    const [alert, setAlert] = useState({
+        showing: false,
+        message: null,
+        action: {
+            text: null,
+            action: null
+        },
+        timeout: null
+    })
+
     const [inputs, setInputs] = useReducer(
         (s, a) => ({...s, ...a}), {})
 
     useEffect(() => setInputs(mission), [missionStatus])
 
-
     async function saveMission() {
-        const form = new FormData()
-        form.set('image', inputs.image ?? '')
-        form.set('title', inputs.title ?? '')
-        form.set('date', inputs.date ?? '')
-        form.set('description', inputs.description ?? '')
-
+        const form = getInputsFormFromState(inputs)
         try {
             await mutate({id: mission.id, data: form})
+            setAlert({...alert, showing: true, message: 'Saved successfully'})
+            console.log('mutation succeeded')
         } catch (e) {
-            // Save request not successful
-            // Tell users there's an error
+            console.log('mutation failed')
+            setAlert({
+                showing: true,
+                message: 'Unable to save. Something went wrong',
+                action: {text: 'Retry', action: () => saveMission()},
+                timeout: 10000
+            })
         }
     }
 
@@ -105,8 +118,26 @@ function MissionEditor() {
                     </div>
                 </div>
             </div>
+
+            <Alert showing={alert.showing}
+                   message={alert.message}
+                   actionText={alert.action.text}
+                   onActionClick={alert.action.action}
+                   timeout={alert.timeout}
+                   onClose={() => setAlert({...alert, showing: false})}
+            />
         </div>
     )
+}
+
+function getInputsFormFromState(inputs) {
+    const form = new FormData()
+    form.set('image', inputs.image ?? '')
+    form.set('title', inputs.title ?? '')
+    form.set('date', inputs.date ?? '')
+    form.set('description', inputs.description ?? '')
+
+    return form
 }
 
 const editorConfig = {

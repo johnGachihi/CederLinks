@@ -1,0 +1,14 @@
+//@use "~@material/snackbar/mdc-snackbar";
+//@use "~@material/snackbar/_index" as snackbar;
+//@import "~@material/snackbar/dist/mdc.snackbar.min";
+
+@import "~@material/button/dist/mdc.button.min.css";
+@import "~@material/react-snackbar/dist/snackbar.min.css";
+
+.mdc-snackbar {
+    right: unset;
+}
+
+.mdc-snackbar__action:not(:disabled) {
+    color: #afa939;
+}

@@ -32,7 +32,7 @@ function useUpdateMission() {
             onError: (error, newMission, rollback) => rollback(),
             onSettled: () => {queryCache.refetchQueries('missions')},
             // useErrorBoundary: false,
-            // throwOnError: true
+            throwOnError: true
         }
     )
 }
@@ -41,7 +41,6 @@ function onUpdateMutation(newMission) {
     const previousMissions = queryCache.getQueryData('missions')
 
     queryCache.setQueryData('missions', old => {
-        // return [...old, newMission]
         return old.map(oldMission =>
             oldMission.id === newMission.id ? {...oldMission, newMission} : oldMission
         )
