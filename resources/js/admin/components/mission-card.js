@@ -1,36 +1,22 @@
 import React, {useMemo} from "react";
+import {Link} from "react-router-dom";
 import '../../../sass/admin/mission-card.scss'
 
 function MissionCard(props) {
-
-    const {day, month, year} = useMemo(() => {
-        return {
-            day: props.date ? props.date.getDay() : '-',
-            month: props.date ? props.date.getMonth() + 1 : '-',
-            year: props.date ? props.date.getFullYear() : '-'
-        }
-    }, [props.date])
-
-    const descriptionPreview = useMemo(() => {
-        if (props.description) {
-            const tempContainer = document.createElement('div')
-            tempContainer.innerHTML = props.description
-            const firstP = tempContainer.getElementsByTagName('p')[0]
-            return firstP ? firstP.innerText : ''
-        }
-    }, [props.description])
+    const {day, month, year} = useDate(props.date)
+    const descriptionPreview = useDescriptionPreview(props.description)
 
     return (
-        <div className="col-md-4 d-flex ftco-animate">
+        <div className="col-md-4 d-flex">
             <div className="blog-entry justify-content-end">
                 <div className="text px-4 py-4">
                     <h3 className="heading mb-0"><a href="#">{props.title}</a></h3>
                 </div>
-                <a href="blog-single.html">
+                <Link to={`/make-mission/${props.id}`}>
                     <img className="block-20 object-fit-cover"
                          src={`${process.env.IMAGES_URL}/${props.image}`}
                          width="100%" />
-                </a>
+                </Link>
                 <div className="text p-4 float-right d-block">
                     <div className="topper d-flex align-items-center">
                         <div className="one py-2 pl-3 pr-1 align-self-stretch">
@@ -42,11 +28,41 @@ function MissionCard(props) {
                         </div>
                     </div>
                     <p className="description" data-testid="description">{descriptionPreview}</p>
-                    <p><a href="#" className="btn btn-primary">Read more</a></p>
+                    <p><Link to={`/make-mission/${props.id}`} className="btn btn-primary">Edit</Link></p>
                 </div>
             </div>
         </div>
     )
 }
+
+function useDate(date) {
+    return useMemo(() => {
+        const monthNames = ['January', 'February', 'March', 'April',
+            'May', 'June', 'July', 'August', 'September', 'October',
+            'November', 'December']
+
+        let _date = {day: '-', month: '-', year: '-'}
+        if (date)
+            _date = {
+                day: date.getDate(),
+                month: monthNames[date.getMonth()],
+                year: date.getFullYear()
+            }
+        return _date
+    }, [date])
+}
+
+const useDescriptionPreview = (description) => useMemo(() => {
+    if (description) {
+        const tempContainer = document.createElement('div')
+        tempContainer.innerHTML = description
+        const firstP = tempContainer.getElementsByTagName('p')[0]
+        return firstP ? firstP.innerHTML : ''
+    } else {
+        return '[no-description]'
+    }
+}, [description])
+
+
 
 export default MissionCard

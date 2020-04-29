@@ -6,11 +6,13 @@ import {useCreateMission} from "../utils/mission";
 import IconActionButton from "../components/icon-action-button";
 import {BeatLoader} from "react-spinners";
 import {useMissions} from "../utils/mission"
+import MissionCard from "../components/mission-card";
 
 function Missions() {
     const history = useHistory()
     const [mutate, {status}] = useCreateMission()
     const {data} = useMissions()
+    console.log(data)
 
     async function handleAddMissionClick() {
         try {
@@ -34,7 +36,10 @@ function Missions() {
                     <BeatLoader loading={status === 'loading'} color="#afa939"/>
                 </div>
 
-                {/*{data.map(mission => mission.id)}*/}
+                <div className="row d-flex my-4">
+                    {data.map((mission, index) =>
+                        <MissionCard {...mission} date={new Date(mission.date)} key={mission.id}/>)}
+                </div>
             </div>
         </div>
     )
