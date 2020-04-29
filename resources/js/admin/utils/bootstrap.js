@@ -12,6 +12,9 @@ async function bootstrapAppData() {
     appData = {user, missions}
 
     queryCache.setQueryData('missions', missions)
+    for (const mission of missions)
+        queryCache.setQueryData(['mission', {id: mission.id}])
+
     return appData;
 }
 

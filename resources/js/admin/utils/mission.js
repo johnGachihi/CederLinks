@@ -1,17 +1,23 @@
 import {useQuery, useMutation, queryCache} from "react-query";
 import * as missionClient from "../../network/missions-client";
 
+function useMissions() {
+    return useQuery({
+        queryKey: "missions",
+        queryFn: missionClient.readAll
+    })
+}
+
 function useMission(missionId) {
     const {data, status} = useQuery({
-        queryKey: ['mission', {missionId}],
+        queryKey: ['mission', {id: missionId}],
         queryFn: getMission
     })
-
     return [data, status]
 }
 
-function getMission(queryKey, {missionId}) {
-    return missionClient.read(missionId)
+function getMission(queryKey, {id}) {
+    return missionClient.read(id)
 }
 
 function useCreateMission() {
@@ -49,4 +55,4 @@ function onUpdateMutation(newMission) {
     return () => queryCache.setQueryData('missions', previousMissions)
 }
 
-export {useMission, useCreateMission, useUpdateMission}
+export {useMissions, useMission, useCreateMission, useUpdateMission}

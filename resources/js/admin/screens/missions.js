@@ -5,10 +5,12 @@ import {useHistory} from "react-router-dom"
 import {useCreateMission} from "../utils/mission";
 import IconActionButton from "../components/icon-action-button";
 import {BeatLoader} from "react-spinners";
+import {useMissions} from "../utils/mission"
 
 function Missions() {
     const history = useHistory()
     const [mutate, {status}] = useCreateMission()
+    const {data} = useMissions()
 
     async function handleAddMissionClick() {
         try {
@@ -31,6 +33,8 @@ function Missions() {
                     />
                     <BeatLoader loading={status === 'loading'} color="#afa939"/>
                 </div>
+
+                {/*{data.map(mission => mission.id)}*/}
             </div>
         </div>
     )

@@ -1,5 +1,5 @@
 import React, {useState, useReducer, useEffect} from 'react'
-import {useParams} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, useParams} from 'react-router-dom'
 import "../../../sass/admin/mission-editor.scss"
 import Navbar from "../components/navbar";
 import IconActionButton from "../components/icon-action-button";
@@ -13,6 +13,7 @@ import {useMission, useUpdateMission} from "../utils/mission";
 import moment from "moment";
 import Alert from "../components/alert";
 import '../../../sass/admin/snackbar.scss'
+
 
 function MissionEditor() {
     const {missionId} = useParams('id')
