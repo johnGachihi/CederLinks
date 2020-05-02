@@ -33,6 +33,7 @@ function client(endpoint, data, customConfig = {}) {
                 redirectToLogin()
                 return
             }
+
             const data = await res.json();
             if (res.ok)
                 return data;
