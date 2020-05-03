@@ -6,8 +6,8 @@ function Alert({
     message,
     actionText,
     onActionClick,
-    onClose,
-    timeout = 5000
+    timeout = 5000,
+    ...callbacks
 }) {
     function setUpSnackBar(snackBar) {
         if (snackBar && onActionClick)
@@ -21,7 +21,7 @@ function Alert({
             message={message}
             actionText={actionText}
             timeoutMs={process.env.NODE_ENV !== "test" ? timeout : 4000}
-            onClose={onClose}
+            {...callbacks}
         />
     );
 }

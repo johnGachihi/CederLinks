@@ -6,11 +6,8 @@ import {
     queryByAttribute,
     waitForElementToBeRemoved
 } from "@testing-library/dom";
-import { waitFor } from "@testing-library/dom";
-import { toBeInTheDocuement } from "@testing-library/jest-dom";
 import Missions from "../../screens/missions";
 import { BrowserRouter } from "react-router-dom";
-import * as missionsClient from "../../../network/missions-client";
 import { act } from "react-dom/test-utils";
 
 enableFetchMocks();
@@ -18,6 +15,36 @@ jest.mock("../../../utils/csrf");
 
 describe("<Missions/>", () => {
     afterEach(() => fetchMock.resetMocks());
+
+    test(`Missions displayed`, async () => {
+        fetchMock.mockResponse(
+            JSON.stringify([
+                {
+                    id: 1,
+                    title: "Mission 1",
+                    description: "<p>Mission 1 description</p>",
+                },
+                {
+                    id: 2,
+                    title: "Mission 2",
+                    description: "<p>Mission 2 description</p>",
+                }
+            ])
+        );
+
+        const { findByRole, findByText } = render(
+            <BrowserRouter>
+                <Missions />
+            </BrowserRouter>
+        );
+
+        await findByRole("heading", {name: "Mission 1"})
+        await findByRole("heading", {name: "Mission 2"})
+        await findByRole("img", {name: "Mission image for Mission 1"})
+        await findByRole("img", {name: "Mission image for Mission 2"})
+        await findByText("Mission 1 description")
+        await findByText("Mission 2 description")
+    });
 
     test(`Loader shown on clicking 'Add Mission' button`, async () => {
         fetchMock.mockResponses(
@@ -40,13 +67,13 @@ describe("<Missions/>", () => {
         await act(() => Promise.resolve());
     });
 
-    test(`'Add Mission' request fails`, async () => {
+    test(`When 'Add Mission' request fails, alert is shown`, async () => {
         fetchMock.mockResponses(
             [JSON.stringify([{ id: 1 }, { id: 2 }])],
             [JSON.stringify({ id: 1 }), { status: 400 }]
         );
 
-        const { findByText, getByText, getByRole } = render(
+        const { findByText, getByText } = render(
             <BrowserRouter>
                 <Missions />
             </BrowserRouter>
@@ -54,11 +81,6 @@ describe("<Missions/>", () => {
 
         fireEvent.click(getByText("Add Mission"));
 
-        await findByText("Error experienced unable to create mission")
-        // await waitFor(() =>
-        //     expect(
-        //         getByText("Error experienced unable to create mission")
-        //     ).not.toBeVisible()
-        // );
+        await findByText("Error experienced unable to create mission");
     });
 });

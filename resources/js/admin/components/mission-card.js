@@ -27,6 +27,7 @@ function MissionCard(props) {
                         }
                         width="100%"
                         data-testid="image"
+                        alt={`Mission image for ${props.title}`}
                     />
                 </Link>
                 <div className="text p-4 float-right d-block">
