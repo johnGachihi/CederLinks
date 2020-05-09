@@ -1,86 +1,125 @@
 import React from "react";
 import "isomorphic-fetch";
-import fetchMock, { enableFetchMocks } from "jest-fetch-mock";
+import fetchMock from "jest-fetch-mock";
 import { render, fireEvent } from "@testing-library/react";
 import {
     queryByAttribute,
-    waitForElementToBeRemoved
+    waitForElementToBeRemoved,
+    findByRole,
+    findByText
 } from "@testing-library/dom";
 import Missions from "../../screens/missions";
 import { BrowserRouter } from "react-router-dom";
 import { act } from "react-dom/test-utils";
+import { toHaveTextContent, toBeVisible } from "@testing-library/jest-dom";
+import * as missionsClient from "../../../network/missions-client";
 
-enableFetchMocks();
 jest.mock("../../../utils/csrf");
+jest.mock("../../../network/missions-client");
+
+async function renderMissionsPage(missions) {
+    if (missions === undefined) {
+        missions = await missionsClient.readAll();
+    } else {
+        missionsClient.readAll = jest.fn(() => Promise.resolve(missions));
+    }
+
+    const utils = render(
+        <BrowserRouter>
+            <Missions />
+        </BrowserRouter>
+    );
+
+    return {
+        ...utils,
+        missions
+    };
+}
 
 describe("<Missions/>", () => {
     afterEach(() => fetchMock.resetMocks());
 
-    test(`Missions displayed`, async () => {
-        fetchMock.mockResponse(
-            JSON.stringify([
-                {
-                    id: 1,
-                    title: "Mission 1",
-                    description: "<p>Mission 1 description</p>",
-                },
-                {
-                    id: 2,
-                    title: "Mission 2",
-                    description: "<p>Mission 2 description</p>",
-                }
-            ])
-        );
+    test(`Published missions displayed`, async () => {
+        const {
+            getByRole,
+            missions,
+            container
+        } = await renderMissionsPage();
 
-        const { findByRole, findByText } = render(
-            <BrowserRouter>
-                <Missions />
-            </BrowserRouter>
-        );
+        fireEvent.click(getByRole("tab", { name: "Published" }));
 
-        await findByRole("heading", {name: "Mission 1"})
-        await findByRole("heading", {name: "Mission 2"})
-        await findByRole("img", {name: "Mission image for Mission 1"})
-        await findByRole("img", {name: "Mission image for Mission 2"})
-        await findByText("Mission 1 description")
-        await findByText("Mission 2 description")
+        for (const mission of missions) {
+            if (mission.status === "published") {
+                await expectMissionCardVisible(container, mission)
+            }
+        }
     });
 
-    test(`Loader shown on clicking 'Add Mission' button`, async () => {
-        fetchMock.mockResponses(
-            JSON.stringify([{ id: 1 }, { id: 2 }]),
-            JSON.stringify({ id: 1 })
-        );
+    test(`Draft missions displayed`, async () => {
+        const {
+            getByRole,
+            missions,
+            container
+        } = await renderMissionsPage();
 
-        const { container, getByText } = render(
-            <BrowserRouter>
-                <Missions />
-            </BrowserRouter>
-        );
+        fireEvent.click(getByRole("tab", { name: "Drafts" }));
+        await act(() => Promise.resolve())
+
+        for (const mission of missions) {
+            if (mission.status === "draft") {
+                await expectMissionCardVisible(container, mission)
+            }
+        }
+    })
+
+    test(`Loader shown on clicking 'Add Mission' button`, async () => {
+        const { container, getByText } = await renderMissionsPage();
 
         fireEvent.click(getByText("Add Mission"));
 
         const getByClassName = queryByAttribute.bind(null, "class");
-        await waitForElementToBeRemoved(() =>
-            getByClassName(container, "css-0")
+        await waitForElementToBeRemoved(
+            () => getByClassName(container, "css-0") // Loader has className="css-0"
         );
         await act(() => Promise.resolve());
     });
 
     test(`When 'Add Mission' request fails, alert is shown`, async () => {
-        fetchMock.mockResponses(
-            [JSON.stringify([{ id: 1 }, { id: 2 }])],
-            [JSON.stringify({ id: 1 }), { status: 400 }]
-        );
-
-        const { findByText, getByText } = render(
-            <BrowserRouter>
-                <Missions />
-            </BrowserRouter>
-        );
+        const { findByText, getByText } = await renderMissionsPage();
+        missionsClient.__setNextRequestToFail(false);
 
         fireEvent.click(getByText("Add Mission"));
 
         await findByText("Error experienced unable to create mission");
     });
+
+    test(`When there are no published missions, illustration shown`, async () => {
+        const { findByRole } = await renderMissionsPage([]);
+
+        await findByRole("img", { name: "No published missions illustration" });
+    });
+
+    test(`When there are no draft missions, illustration shown`, async () => {
+        const { findByRole, getByRole } = await renderMissionsPage([]);
+
+        fireEvent.click(getByRole("tab", { name: "Drafts" }));
+
+        await findByRole("img", { name: "No draft missions illustration" });
+        act(() => {});
+    });
 });
+
+
+async function expectMissionCardVisible(container, mission) {
+    expect(
+        await findByRole(container, "heading", { name: mission.title })
+    ).toBeVisible();
+    expect(
+        await findByRole(container, "img", {
+            name: `Mission image for ${mission.title}`
+        })
+    ).toBeVisible();
+    expect(
+        await findByText(container, mission.descriptionPreview)
+    ).toBeVisible();
+}

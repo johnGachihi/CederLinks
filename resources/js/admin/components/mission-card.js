@@ -31,7 +31,7 @@ function MissionCard(props) {
                     />
                 </Link>
                 <div className="text p-4 float-right d-block">
-                    <div className="topper d-flex align-items-center">
+                    <div className="topper d-flex align-items-center" data-testid="date">
                         <div className="one py-2 pl-3 pr-1 align-self-stretch">
                             <span className="day" data-testid="day">
                                 {day}
