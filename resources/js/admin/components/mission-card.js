@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import "../../../sass/admin/mission-card.scss";
 import defaultImage from "../../assets/images/philippe-unsplash.jpg";
+import LazyLoad from "react-lazyload";
 
 function MissionCard(props) {
     const { day, month, year } = useDate(props.date);
@@ -12,26 +13,34 @@ function MissionCard(props) {
             <div className="blog-entry justify-content-end">
                 <div className="text px-4 py-4">
                     <h3 className="heading mb-0">
-                        <Link to={`/make-mission/${props.id}`} data-testid="title">
-                            {props.title ?? '[no-title-provided]'}
+                        <Link
+                            to={`/make-mission/${props.id}`}
+                            data-testid="title"
+                        >
+                            {props.title ?? "[no-title-provided]"}
                         </Link>
                     </h3>
                 </div>
                 <Link to={`/make-mission/${props.id}`}>
-                    <img
-                        className="block-20 object-fit-cover"
-                        src={
-                            props.image
-                                ? `${process.env.IMAGES_URL}/${props.image}`
-                                : defaultImage
-                        }
-                        width="100%"
-                        data-testid="image"
-                        alt={`Mission image for ${props.title}`}
-                    />
+                    <LazyLoad>
+                        <img
+                            className="block-20 object-fit-cover"
+                            src={
+                                props.image
+                                    ? `${process.env.IMAGES_URL}/${props.image}`
+                                    : defaultImage
+                            }
+                            width="100%"
+                            data-testid="image"
+                            alt={`Mission image for ${props.title}`}
+                        />
+                    </LazyLoad>
                 </Link>
                 <div className="text p-4 float-right d-block">
-                    <div className="topper d-flex align-items-center" data-testid="date">
+                    <div
+                        className="topper d-flex align-items-center"
+                        data-testid="date"
+                    >
                         <div className="one py-2 pl-3 pr-1 align-self-stretch">
                             <span className="day" data-testid="day">
                                 {day}

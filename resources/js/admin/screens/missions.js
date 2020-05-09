@@ -114,7 +114,6 @@ function Missions() {
                                         height="100%"
                                         src={noResults}
                                         alt="No draft missions illustration"
-
                                     />
                                     <span>No draft missions yet</span>
                                 </div>
