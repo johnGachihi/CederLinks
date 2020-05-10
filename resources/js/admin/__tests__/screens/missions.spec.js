@@ -36,6 +36,20 @@ async function renderMissionsPage(missions) {
     };
 }
 
+async function expectMissionCardVisible(container, mission) {
+    expect(
+        await findByRole(container, "heading", { name: mission.title })
+    ).toBeVisible();
+    expect(
+        await findByRole(container, "img", {
+            name: `Mission image for ${mission.title}`
+        })
+    ).toBeVisible();
+    expect(
+        await findByText(container, mission.descriptionPreview)
+    ).toBeVisible();
+}
+
 describe("<Missions/>", () => {
     afterEach(() => fetchMock.resetMocks());
 
@@ -45,7 +59,7 @@ describe("<Missions/>", () => {
             missions,
             container
         } = await renderMissionsPage();
-
+        
         fireEvent.click(getByRole("tab", { name: "Published" }));
 
         for (const mission of missions) {
@@ -108,18 +122,3 @@ describe("<Missions/>", () => {
         act(() => {});
     });
 });
-
-
-async function expectMissionCardVisible(container, mission) {
-    expect(
-        await findByRole(container, "heading", { name: mission.title })
-    ).toBeVisible();
-    expect(
-        await findByRole(container, "img", {
-            name: `Mission image for ${mission.title}`
-        })
-    ).toBeVisible();
-    expect(
-        await findByText(container, mission.descriptionPreview)
-    ).toBeVisible();
-}

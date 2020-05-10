@@ -1,0 +1,13 @@
+@import "~@material/react-dialog/dist/dialog.min.css";
+
+.mdc-dialog {
+    font-family: unquote("Poppins, Arial, sans-serif");
+
+    * {
+        font-family: unquote("Poppins, Arial, sans-serif");
+    }
+
+    .mdc-button {
+        color: #afa939;
+    }
+}

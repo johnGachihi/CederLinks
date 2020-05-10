@@ -7,6 +7,6 @@ module.exports = {
     transformIgnorePatterns: ["node_modules/(?!(@material)/)",],
     moduleNameMapper: {
         "\\.(css|scss)$": "identity-obj-proxy",
-        "\\.(jpeg|jpg|svg)$": "<rootDir>/resources/js/__mocks__/fileMock.js"
+        "\\.(jpeg|jpg|svg|png)$": "<rootDir>/resources/js/__mocks__/fileMock.js"
     }
 };

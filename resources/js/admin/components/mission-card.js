@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import "../../../sass/admin/mission-card.scss";
 import defaultImage from "../../assets/images/philippe-unsplash.jpg";
-import LazyLoad from "react-lazyload";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function MissionCard(props) {
     const { day, month, year } = useDate(props.date);
@@ -22,19 +22,17 @@ function MissionCard(props) {
                     </h3>
                 </div>
                 <Link to={`/make-mission/${props.id}`}>
-                    <LazyLoad>
-                        <img
-                            className="block-20 object-fit-cover"
-                            src={
-                                props.image
-                                    ? `${process.env.IMAGES_URL}/${props.image}`
-                                    : defaultImage
-                            }
-                            width="100%"
-                            data-testid="image"
-                            alt={`Mission image for ${props.title}`}
-                        />
-                    </LazyLoad>
+                    <LazyLoadImage
+                        className="block-20 object-fit-cover"
+                        src={
+                            props.image
+                                ? `${process.env.IMAGES_URL}/${props.image}`
+                                : defaultImage
+                        }
+                        width="100%"
+                        data-testid="image"
+                        alt={`Mission image for ${props.title}`}
+                    />
                 </Link>
                 <div className="text p-4 float-right d-block">
                     <div
