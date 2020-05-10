@@ -33,5 +33,6 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/mission', 'MissionController@create');
         Route::get('/mission/{id?}', 'MissionController@read');
         Route::post('/mission/{id}', 'MissionController@update');
+        Route::delete('/mission/{id}', 'MissionController@delete');
     });
 });

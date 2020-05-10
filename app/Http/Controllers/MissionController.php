@@ -24,17 +24,19 @@ class MissionController extends Controller
         return $mission;
     }
 
-    public function read($id = null) {
-        if ($id)
-            return Mission::find($id);
-        else
-            return Mission::all();
+    public function read($id = null)
+    {
+        return $id
+            ? Mission::find($id)
+            : Mission::all();
     }
 
-    public function update(Request $request, $id) {
-        $mission = Mission::find($id);
+    public function update(Request $request, $id)
+    {
+        $mission = Mission::findOrFail($id);
         $mission->title = $request->title;
         if ($request->hasFile('image')) {
+            $this->deleteImage($mission->image);
             $mission->image = $this->storeImage(
                 $request->file('image'), $id);
         }
@@ -47,10 +49,26 @@ class MissionController extends Controller
         return response()->json(['status' => 'ok']);
     }
 
-    private function storeImage(UploadedFile $image, $missionId): string {
+    private function storeImage(UploadedFile $image, $missionId): string
+    {
         return $image->storeAs(
             'missions',
             $missionId . '.' . $image->getClientOriginalExtension(),
             'image-uploads');
+    }
+
+    private function deleteImage($imagePath)
+    {
+        if (!$imagePath)
+            return;
+
+        if (!Storage::disk('image-uploads')->delete($imagePath))
+            Log::error('Deleting previous image during mission image update failed');
+    }
+
+    public function delete($id)
+    {
+        $mission = Mission::findOrFail($id);
+        $mission->delete();
     }
 }
