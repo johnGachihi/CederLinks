@@ -11,7 +11,15 @@ function useMissions() {
 function useMission(missionId) {
     const { data, status } = useQuery({
         queryKey: ["mission", { id: missionId }],
-        queryFn: getMission
+        queryFn: getMission,
+        config: {
+            initialData: () => {
+                const missionsQuery = queryCache.getQuery("missions");
+                if (missionsQuery && Date.now() - missionsQuery.state.updatedAt <= 2*60*1000) {
+                    return missionsQuery.state.data.find(d => d.id === missionId);
+                }
+            }
+        }
     });
     return [data, status];
 }
@@ -56,8 +64,6 @@ function onUpdateMutation(newMission) {
     return () => queryCache.setQueryData("missions", previousMissions);
 }
 
-function useDeleteMission(missionId) {
-    
-}
+function useDeleteMission(missionId) {}
 
 export { useMissions, useMission, useCreateMission, useUpdateMission };

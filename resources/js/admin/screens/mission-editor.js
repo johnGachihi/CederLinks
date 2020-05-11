@@ -23,7 +23,7 @@ import Dialog, {
 
 function MissionEditor() {
     const { missionId } = useParams("id");
-    const [mission, missionStatus] = useMission(missionId);
+    const [mission, missionStatus] = useMission(Number(missionId));
     const [mutate, { status }] = useUpdateMission();
     const [editorError, setEditorError] = useState(null);
     const [alert, setAlert] = useState({
