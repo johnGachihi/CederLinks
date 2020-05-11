@@ -2,10 +2,15 @@
     border: 1px solid #afa939;
     border-radius: 5px;
 
+    .text .heading a {
+        font-size: 1rem;
+    }
+
     .description {
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
+        font-size: 0.9rem;
     }
 }

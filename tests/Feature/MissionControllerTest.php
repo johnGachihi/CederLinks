@@ -109,17 +109,17 @@ class MissionControllerTest extends TestCase
 
         $response = $this->actingAs($admin)
             ->json('POST', '/admin/mission/' . $mission->id, [
-                'title' => $updatedMission->title,
-                'date' => $updatedMission->date,
-                'description' => $updatedMission->description
+                'title' => 'New title',
+                'date' => '2002-09-12 00:00:00',
+                'description' => 'New description'
             ]);
 
         $response->assertOk();
-        $this->assertDatabaseHas('missions', [
-            'title' => $updatedMission->title,
-            'date' => $updatedMission->date,
-            'description' => $updatedMission->description
-        ]);
+        $mission->refresh();
+        $this->assertEquals($mission->title, 'New title');
+        $this->assertEquals($mission->date, '2002-09-12 00:00:00');
+        $this->assertEquals($mission->description, 'New description');
+        $response->assertJson($mission->toArray());
     }
 
     public function test_update_missionImageWhenItWasNull()
@@ -142,7 +142,7 @@ class MissionControllerTest extends TestCase
         Storage::disk('image-uploads')->assertExists("missions/$mission->id.jpg");
     }
 
-    public function test_update_whenItExisted()
+    public function test_update_missionImageWhenItExisted()
     {
         Storage::fake('image-uploads');
         $admin = factory(User::class)->create([
@@ -198,5 +198,28 @@ class MissionControllerTest extends TestCase
         $this->assertDatabaseMissing('missions', [
             'id' => $mission->id
         ]);
+    }
+
+    public function test_delete_removesMissionImage()
+    {
+        // GIVEN
+        Storage::fake('image-uploads');
+        $image = UploadedFile::fake()->image('image.jpg')
+            ->storeAs('missions', 'image.jpg', 'image-uploads');
+        $mission = factory(Mission::class)->create([
+            'image' => $image
+        ]);
+        Storage::disk('image-uploads')->assertExists($image);
+
+        // WHEN
+        $admin = factory(User::class)->create([
+            'type' => 'admin'
+        ]);
+        $response = $this->actingAs($admin)
+            ->json('DELETE', "/admin/mission/$mission->id");
+
+        // THEN
+        $response->assertOk();
+        Storage::disk('image-uploads')->assertMissing($image);
     }
 }

@@ -46,7 +46,7 @@ class MissionController extends Controller
         $mission->description = $request->description;
         $mission->save();
 
-        return response()->json(['status' => 'ok']);
+        return $mission->toJson();
     }
 
     private function storeImage(UploadedFile $image, $missionId): string
@@ -69,6 +69,7 @@ class MissionController extends Controller
     public function delete($id)
     {
         $mission = Mission::findOrFail($id);
+        $this->deleteImage($mission->image);
         $mission->delete();
     }
 }
