@@ -1,5 +1,5 @@
 import React, {useRef, useMemo} from 'react'
-import defaultImage from "../../assets/images/philippe-unsplash.jpg"
+import defaultImage from "../../assets/images/image-placeholder.svg"
 import ReactTooltip from "react-tooltip"
 
 function ImageUploader({image, onImageChange, cssClass}) {

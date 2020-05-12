@@ -1,6 +1,14 @@
+@import "~@material/elevation";
+
 .blog-entry {
-    border: 1px solid #afa939;
+    border: 1px solid #cecece;
     border-radius: 5px;
+    width: 100%;
+    transition: box-shadow 0.2s linear;
+
+    &:hover {
+        @include elevation(9)
+    }
 
     .text .heading a {
         font-size: 1rem;

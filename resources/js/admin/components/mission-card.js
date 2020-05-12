@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import "../../../sass/admin/mission-card.scss";
-import defaultImage from "../../assets/images/philippe-unsplash.jpg";
+import defaultImage from "../../assets/images/image-placeholder.svg";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function MissionCard(props) {
