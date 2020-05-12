@@ -16,4 +16,8 @@ function update(id, form) {
     return client(`admin/mission/${id}`, form)
 }
 
-export {create, read, update, readAll}
+function remove(missionId) {
+    return client(`admin/mission/${missionId}`, {method: "DELETE"})
+}
+
+export {create, read, update, readAll, remove}

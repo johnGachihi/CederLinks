@@ -15,8 +15,13 @@ function useMission(missionId) {
         config: {
             initialData: () => {
                 const missionsQuery = queryCache.getQuery("missions");
-                if (missionsQuery && Date.now() - missionsQuery.state.updatedAt <= 2*60*1000) {
-                    return missionsQuery.state.data.find(d => d.id === missionId);
+                if (
+                    missionsQuery &&
+                    Date.now() - missionsQuery.state.updatedAt <= 2 * 60 * 1000
+                ) {
+                    return missionsQuery.state.data.find(
+                        mission => mission.id === missionId
+                    );
                 }
             }
         }
@@ -30,6 +35,9 @@ function getMission(queryKey, { id }) {
 
 function useCreateMission() {
     return useMutation(missionClient.create, {
+        onSuccess: newMission => {
+            queryCache.setQueryData("missions", old => [...old, newMission])
+        },
         onSettled: () => {
             queryCache.refetchQueries("missions");
         },
@@ -40,30 +48,45 @@ function useCreateMission() {
 
 function useUpdateMission() {
     return useMutation(({ id, data }) => missionClient.update(id, data), {
-        onMutate: onUpdateMutation,
-        onError: (error, newMission, rollback) => rollback(),
+        onSuccess: updatedMission => {
+            queryCache.setQueryData("mission", updatedMission);
+            queryCache.setQueryData("missions", old => {
+                return old?.map(mission =>
+                    mission.id === updatedMission.id ? updatedMission : mission
+                );
+            });
+        },
         onSettled: () => {
             queryCache.refetchQueries("missions");
         },
-        // useErrorBoundary: false,
         throwOnError: true
     });
 }
 
-function onUpdateMutation(newMission) {
-    const previousMissions = queryCache.getQueryData("missions");
 
-    queryCache.setQueryData("missions", old => {
-        return old.map(oldMission =>
-            oldMission.id === newMission.id
-                ? { ...oldMission, ...newMission }
-                : oldMission
-        );
+function useRemoveMission() {
+    return useMutation(({ id }) => missionClient.remove(id), {
+        onMutate: removedMission => {
+            const previousMissions = queryCache.getQueryData("missions");
+
+            queryCache.setQueryData("missions", old => {
+                old?.filter(mission => mission.id !== removedMission.id);
+            });
+
+            return () => queryCache.setQueryData("missions", previousMissions);
+        },
+        onError: (error, variables, rollback) => rollback(),
+        onSettled: () => {
+            queryCache.refetchQueries("missions");
+        },
+        throwOnError: true
     });
-
-    return () => queryCache.setQueryData("missions", previousMissions);
 }
 
-function useDeleteMission(missionId) {}
-
-export { useMissions, useMission, useCreateMission, useUpdateMission };
+export {
+    useMissions,
+    useMission,
+    useCreateMission,
+    useUpdateMission,
+    useRemoveMission
+};
