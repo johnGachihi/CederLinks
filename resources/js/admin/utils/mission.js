@@ -56,7 +56,7 @@ function onUpdateMutation(newMission) {
     queryCache.setQueryData("missions", old => {
         return old.map(oldMission =>
             oldMission.id === newMission.id
-                ? { ...oldMission, newMission }
+                ? { ...oldMission, ...newMission }
                 : oldMission
         );
     });
