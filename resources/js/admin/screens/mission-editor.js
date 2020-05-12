@@ -1,5 +1,5 @@
 import React, { useState, useReducer, useEffect } from "react";
-import { BrowserRouter as Router, Switch, useParams } from "react-router-dom";
+import { BrowserRouter as Router, Switch, useParams, useHistory } from "react-router-dom";
 import "../../../sass/admin/mission-editor.scss";
 import Navbar from "../components/navbar";
 import IconActionButton from "../components/icon-action-button";
@@ -9,7 +9,11 @@ import DatePicker from "../components/datepicker";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import BalloonBlockEditor from "@ckeditor/ckeditor5-build-balloon-block";
 import { BeatLoader } from "react-spinners";
-import { useMission, useUpdateMission } from "../utils/mission";
+import {
+    useMission,
+    useUpdateMission,
+    useRemoveMission
+} from "../utils/mission";
 import moment from "moment";
 import Alert from "../components/alert";
 import "../../../sass/admin/snackbar.scss";
@@ -23,8 +27,10 @@ import Dialog, {
 
 function MissionEditor() {
     const { missionId } = useParams("id");
+    const history = useHistory()
     const [mission, missionStatus] = useMission(Number(missionId));
     const [mutate, { status }] = useUpdateMission();
+    const [removeMissionMutation] = useRemoveMission();
     const [editorError, setEditorError] = useState(null);
     const [alert, setAlert] = useState({
         showing: false,
@@ -57,6 +63,20 @@ function MissionEditor() {
                 showing: true,
                 message: "Unable to save. Something went wrong",
                 action: { text: "Retry", action: () => saveMission() },
+                timeout: 10000
+            });
+        }
+    }
+
+    async function removeMission() {
+        try {
+            await removeMissionMutation({id: Number(missionId)});
+            history.push('/');
+        } catch (e) {
+            setAlert({
+                showing: true,
+                message: "Unable to delete. Something went wrong",
+                action: { text: "Retry", action: () => removeMission() },
                 timeout: 10000
             });
         }
@@ -102,7 +122,10 @@ function MissionEditor() {
                                     className="dropdown-item"
                                     onClick={() => setDialogIsOpen(true)}
                                 >
-                                    <i className="icon-delete" style={{paddingRight: "5px"}}></i>
+                                    <i
+                                        className="icon-delete"
+                                        style={{ paddingRight: "5px" }}
+                                    ></i>
                                     <span>Delete this mission</span>
                                 </button>
                             </div>
@@ -175,12 +198,16 @@ function MissionEditor() {
             <Dialog
                 open={dialogIsOpen}
                 onClose={action => {
-                    console.log(action);
                     setDialogIsOpen(false);
+                    if (action === "delete") {
+                        removeMission()
+                    }
                 }}
             >
                 <DialogTitle>Delete Mission</DialogTitle>
-                <DialogContent>Are you sure you want to delete this mission?</DialogContent>
+                <DialogContent>
+                    Are you sure you want to delete this mission?
+                </DialogContent>
                 <DialogFooter>
                     <DialogButton action="dismiss">Cancel</DialogButton>
                     <DialogButton action="delete" isDefault>

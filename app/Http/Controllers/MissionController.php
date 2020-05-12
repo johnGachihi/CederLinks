@@ -71,5 +71,7 @@ class MissionController extends Controller
         $mission = Mission::findOrFail($id);
         $this->deleteImage($mission->image);
         $mission->delete();
+
+        return response()->json(["status" => "ok"]);
     }
 }

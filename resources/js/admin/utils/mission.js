@@ -69,9 +69,9 @@ function useRemoveMission() {
         onMutate: removedMission => {
             const previousMissions = queryCache.getQueryData("missions");
 
-            queryCache.setQueryData("missions", old => {
-                old?.filter(mission => mission.id !== removedMission.id);
-            });
+            queryCache.setQueryData("missions", old =>
+                old?.filter(mission => mission.id !== removedMission.id)
+            );
 
             return () => queryCache.setQueryData("missions", previousMissions);
         },
