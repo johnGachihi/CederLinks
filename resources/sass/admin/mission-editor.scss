@@ -26,15 +26,8 @@ body {
     margin-bottom: 11px;
 }
 
-// CKEditor
-.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {
-    height: 75vh;
-
-    &.ck-focused {
-        border: 2px solid #afa939;
-    }
-
-    &.ck-blurred {
-        border: 1px solid #949494;
-    }
+.mission-status {
+    font-size: 0.85rem;
+    margin-left: 22px;
+    text-decoration: underline;
 }

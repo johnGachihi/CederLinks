@@ -19,7 +19,7 @@ function useMission(missionId) {
                     missionsQuery &&
                     Date.now() - missionsQuery.state.updatedAt <= 2 * 60 * 1000
                 ) {
-                    return missionsQuery.state.data.find(
+                    return missionsQuery?.state.data?.find(
                         mission => mission.id === missionId
                     );
                 }
@@ -36,7 +36,7 @@ function getMission(queryKey, { id }) {
 function useCreateMission() {
     return useMutation(missionClient.create, {
         onSuccess: newMission => {
-            queryCache.setQueryData("missions", old => [...old, newMission])
+            queryCache.setQueryData("missions", old => [...old, newMission]);
         },
         onSettled: () => {
             queryCache.refetchQueries("missions");
@@ -62,7 +62,6 @@ function useUpdateMission() {
         throwOnError: true
     });
 }
-
 
 function useRemoveMission() {
     return useMutation(({ id }) => missionClient.remove(id), {

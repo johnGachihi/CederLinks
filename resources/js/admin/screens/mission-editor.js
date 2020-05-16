@@ -1,13 +1,13 @@
 import React, { useState, useReducer, useEffect } from "react";
-import { BrowserRouter as Router, Switch, useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import "../../../sass/admin/mission-editor.scss";
 import Navbar from "../components/navbar";
 import IconActionButton from "../components/icon-action-button";
+import ActionButton from "../components/action-button";
 import ImageUploader from "../components/image-uploader";
 import TextField from "../components/textfield";
 import DatePicker from "../components/datepicker";
-import CKEditor from "@ckeditor/ckeditor5-react";
-import BalloonBlockEditor from "@ckeditor/ckeditor5-build-balloon-block";
+import Editor from "../components/editor";
 import { BeatLoader } from "react-spinners";
 import {
     useMission,
@@ -24,13 +24,17 @@ import Dialog, {
     DialogFooter,
     DialogButton
 } from "@material/react-dialog";
+import Loader from "../components/loader";
 
 function MissionEditor() {
     const { missionId } = useParams("id");
-    const history = useHistory()
+    const history = useHistory();
     const [mission, missionStatus] = useMission(Number(missionId));
     const [mutate, { status }] = useUpdateMission();
-    const [removeMissionMutation] = useRemoveMission();
+    const [
+        removeMissionMutation,
+        { status: removeMissionMutationStatus }
+    ] = useRemoveMission();
     const [editorError, setEditorError] = useState(null);
     const [alert, setAlert] = useState({
         showing: false,
@@ -56,9 +60,7 @@ function MissionEditor() {
                 showing: true,
                 message: "Saved successfully"
             });
-            console.log("mutation succeeded");
         } catch (e) {
-            console.log("mutation failed");
             setAlert({
                 showing: true,
                 message: "Unable to save. Something went wrong",
@@ -68,10 +70,53 @@ function MissionEditor() {
         }
     }
 
+    async function publishMission() {
+        const form = getInputsFormFromState(inputs);
+        form.set("status", "published");
+
+        try {
+            await mutate({ id: mission.id, data: form });
+            setAlert({
+                ...alert,
+                showing: true,
+                message: "Published successfully"
+            });
+        } catch (e) {
+            setAlert({
+                showing: true,
+                message: "Unable to publish. Something went wrong",
+                action: { text: "Retry", action: () => publishMission() },
+                timeout: 10000
+            });
+        }
+    }
+
+    async function unPublishMission() {
+        const form = getInputsFormFromState(inputs);
+        form.set("status", "draft");
+        console.log(mission);
+
+        try {
+            await mutate({ id: mission.id, data: form });
+            setAlert({
+                ...alert,
+                showing: true,
+                message: "Unpublished successfully"
+            });
+        } catch (e) {
+            setAlert({
+                showing: true,
+                message: "Unable to unpublish. Something went wrong",
+                action: { text: "Retry", action: () => unPublishMission() },
+                timeout: 10000
+            });
+        }
+    }
+
     async function removeMission() {
         try {
-            await removeMissionMutation({id: Number(missionId)});
-            history.push('/');
+            await removeMissionMutation({ id: Number(mission.id) });
+            history.push("/");
         } catch (e) {
             setAlert({
                 showing: true,
@@ -82,7 +127,7 @@ function MissionEditor() {
         }
     }
 
-    if (editorError) return "Error loading editor";
+    if (editorError) return "Error loading editor. " + editorError;
 
     if (missionStatus === "loading") return "Loading :/";
 
@@ -91,32 +136,56 @@ function MissionEditor() {
             <Navbar />
             <div className="container">
                 <div className="_toolbar_ separate">
-                    <IconActionButton
-                        onClick={saveMission}
-                        icomoonIcon="icon-save"
-                        label="Save"
-                    />
-                    <BeatLoader
-                        loading={status === "loading"}
-                        color="#afa939"
-                    />
                     <div>
                         <IconActionButton
-                            icomoonIcon="icon-check"
-                            label="Publish"
-                            className="mr-1"
+                            onClick={saveMission}
+                            icomoonIcon="icon-save"
+                            label="Save"
                         />
+                        <span
+                            className="mission-status"
+                            data-testid="mission-status"
+                        >
+                            {mission?.status}
+                        </span>
+                    </div>
+                    <Loader
+                        loading={
+                            status === "loading" ||
+                            removeMissionMutationStatus === "loading"
+                        }
+                        aria-label="Saving mission"
+                    />
+                    <div>
+                        {mission && mission.status === "published" ? (
+                            <ActionButton
+                                onClick={unPublishMission}
+                                className="mr-1"
+                            >
+                                Unpublish
+                            </ActionButton>
+                        ) : (
+                            <ActionButton
+                                onClick={publishMission}
+                                className="mr-1"
+                            >
+                                Publish
+                            </ActionButton>
+                        )}
+
                         <div className="dropdown d-inline">
                             <IconActionButton
+                                id="dropdown"
                                 icomoonIcon="icon-chevron-down"
                                 type="button"
                                 data-toggle="dropdown"
                                 aria-haspopup="true"
                                 aria-expanded="false"
+                                aria-label="Dropdown button"
                             />
                             <div
                                 className="dropdown-menu dropdown-menu-right"
-                                aria-labelledby=""
+                                aria-labelledby="dropdown"
                             >
                                 <button
                                     className="dropdown-item"
@@ -170,17 +239,12 @@ function MissionEditor() {
                     style={{ marginTop: "40px", marginBottom: "40px" }}
                 >
                     <div className="col-md-8 mx-auto">
-                        <CKEditor
-                            editor={BalloonBlockEditor}
-                            config={editorConfig}
-                            onInit={editor => {
-                                if (inputs.description)
-                                    editor.setData(inputs.description);
-                            }}
+                        <Editor
+                            initData={inputs.description}
                             onError={error => setEditorError(error)}
-                            onChange={(event, editor) => {
-                                setInputs({ description: editor.getData() });
-                            }}
+                            onChange={newData =>
+                                setInputs({ description: newData })
+                            }
                         />
                     </div>
                 </div>
@@ -200,7 +264,7 @@ function MissionEditor() {
                 onClose={action => {
                     setDialogIsOpen(false);
                     if (action === "delete") {
-                        removeMission()
+                        removeMission();
                     }
                 }}
             >

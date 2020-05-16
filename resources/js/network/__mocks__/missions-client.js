@@ -1,7 +1,7 @@
 let shouldSucceed = true;
 
 function __setNextRequestToFail(_shouldSucceed) {
-    shouldSucceed = _shouldSucceed
+    shouldSucceed = _shouldSucceed;
 }
 
 function readAll() {
@@ -25,17 +25,46 @@ function readAll() {
     ]);
 }
 
-function create() {
-    const _shouldSucceed = shouldSucceed
+function read() {
+    const _shouldSucceed = shouldSucceed;
     shouldSucceed = true;
 
     return _shouldSucceed
         ? Promise.resolve({
-              id: 3,
-              title: "Mission 3",
-              description: "<p>Mission 3 description</p>"
+              id: 1,
+              title: "Mission 1",
+              description: "<p>Mission 1 description</p>",
+              descriptionPreview: "Mission 1 description",
+              date: "2019-06-05",
+              status: "published"
           })
         : Promise.reject("Failed");
 }
 
-export { readAll, create, __setNextRequestToFail };
+function create() {
+    const _shouldSucceed = shouldSucceed;
+    shouldSucceed = true;
+
+    return _shouldSucceed
+        ? Promise.resolve({
+              id: 3
+          })
+        : Promise.reject("Failed");
+}
+
+function update() {
+    return Promise.resolve({
+        id: 1,
+        title: "Mission 1",
+        description: "<p>Mission 1 description</p>",
+        descriptionPreview: "Mission 1 description",
+        date: "2019-06-06",
+        status: "published"
+    });
+}
+
+function remove() {
+    return Promise.resolve({ status: "ok" });
+}
+
+export { read, readAll, update, create, remove, __setNextRequestToFail };

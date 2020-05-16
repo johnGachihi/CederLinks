@@ -44,6 +44,9 @@ class MissionController extends Controller
             $mission->date = new Carbon($request->date);
         }
         $mission->description = $request->description;
+        if ($request->filled('status')) {
+            $mission->status = $request->status;
+        }
         $mission->save();
 
         return $mission->toJson();
