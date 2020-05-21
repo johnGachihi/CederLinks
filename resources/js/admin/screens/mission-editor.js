@@ -8,7 +8,6 @@ import ImageUploader from "../components/image-uploader";
 import TextField from "../components/textfield";
 import DatePicker from "../components/datepicker";
 import Editor from "../components/editor";
-import { BeatLoader } from "react-spinners";
 import {
     useMission,
     useUpdateMission,
@@ -36,17 +35,8 @@ function MissionEditor() {
         { status: removeMissionMutationStatus }
     ] = useRemoveMission();
     const [editorError, setEditorError] = useState(null);
-    const [alert, setAlert] = useState({
-        showing: false,
-        message: null,
-        action: {
-            text: null,
-            action: null
-        },
-        timeout: null
-    });
+    const { alert, showAlert, setAlertClosed } = useAlert();
     const [dialogIsOpen, setDialogIsOpen] = useState(false);
-
     const [inputs, setInputs] = useReducer((s, a) => ({ ...s, ...a }), {});
 
     useEffect(() => setInputs(mission), [missionStatus]);
@@ -55,17 +45,14 @@ function MissionEditor() {
         const form = getInputsFormFromState(inputs);
         try {
             await mutate({ id: mission.id, data: form });
-            setAlert({
-                ...alert,
-                showing: true,
-                message: "Saved successfully"
+            showAlert({
+                message: "Saved successfully",
+                timeout: 5000
             });
         } catch (e) {
-            setAlert({
-                showing: true,
+            showAlert({
                 message: "Unable to save. Something went wrong",
-                action: { text: "Retry", action: () => saveMission() },
-                timeout: 10000
+                action: { text: "Retry", action: () => saveMission() }
             });
         }
     }
@@ -76,17 +63,14 @@ function MissionEditor() {
 
         try {
             await mutate({ id: mission.id, data: form });
-            setAlert({
-                ...alert,
-                showing: true,
-                message: "Published successfully"
+            showAlert({
+                message: "Published successfully",
+                timeout: 5000
             });
         } catch (e) {
-            setAlert({
-                showing: true,
+            showAlert({
                 message: "Unable to publish. Something went wrong",
-                action: { text: "Retry", action: () => publishMission() },
-                timeout: 10000
+                action: { text: "Retry", action: () => publishMission() }
             });
         }
     }
@@ -98,17 +82,14 @@ function MissionEditor() {
 
         try {
             await mutate({ id: mission.id, data: form });
-            setAlert({
-                ...alert,
-                showing: true,
-                message: "Unpublished successfully"
+            showAlert({
+                message: "Unpublished successfully",
+                timeout: 5000
             });
         } catch (e) {
             setAlert({
-                showing: true,
                 message: "Unable to unpublish. Something went wrong",
-                action: { text: "Retry", action: () => unPublishMission() },
-                timeout: 10000
+                action: { text: "Retry", action: () => unPublishMission() }
             });
         }
     }
@@ -119,10 +100,8 @@ function MissionEditor() {
             history.push("/");
         } catch (e) {
             setAlert({
-                showing: true,
                 message: "Unable to delete. Something went wrong",
-                action: { text: "Retry", action: () => removeMission() },
-                timeout: 10000
+                action: { text: "Retry", action: () => removeMission() }
             });
         }
     }
@@ -256,7 +235,7 @@ function MissionEditor() {
                 actionText={alert.action.text}
                 onActionClick={alert.action.action}
                 timeout={alert.timeout}
-                onClose={() => setAlert({ ...alert, showing: false })}
+                onClose={setAlertClosed}
             />
 
             <Dialog
@@ -293,8 +272,33 @@ function getInputsFormFromState(inputs) {
     return form;
 }
 
-const editorConfig = {
-    placeholder: "Insert the mission description here"
-};
+function useAlert() {
+    const initAlertState = {
+        showing: false,
+        message: null,
+        action: {
+            text: null,
+            action: null
+        },
+        timeout: null
+    };
+
+    const [alert, setAlert] = useState(initAlertState);
+
+    const showAlert = config => {
+        setAlert({
+            ...alert,
+            timeout: 1000,
+            ...config,
+            showing: true
+        });
+    };
+
+    const setAlertClosed = () => {
+        setAlert(initAlertState);
+    };
+
+    return { showAlert, setAlertClosed, alert };
+}
 
 export default MissionEditor;
