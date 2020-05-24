@@ -12,6 +12,7 @@ class VisitorPagesController extends Controller
     {
         $missions = Mission::where("status", "published")
             ->where("date", ">=", Carbon::now())
+            ->orderBy("date", "asc")
             ->take(10)
             ->get();
 

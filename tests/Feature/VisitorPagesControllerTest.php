@@ -52,11 +52,11 @@ class VisitorPagesControllerTest extends TestCase
     public function test_index_onlyReceivesFutureMissions()
     {
         $mission1 = factory(Mission::class)->create([
-            "date" => $this->faker->dateTimeBetween('now', '+1 year'),
+            "date" => Carbon::now()->addYear(),
             "status" => "published"
         ]);
         factory(Mission::class)->create([
-            "date" => $this->faker->dateTimeBetween('-1 year', 'now'),
+            "date" => Carbon::now()->subYear(),
             "status" => "published"
         ]);
 
@@ -83,12 +83,12 @@ class VisitorPagesControllerTest extends TestCase
 
     public function test_index_receivesMissionsInAscendingOrderByDate()
     {
-        $nearingMission = factory(Mission::class)->create([
-            'date' => Carbon::now()->addYear(),
-            'status' => 'published'
-        ]);
         $furtherMission = factory(Mission::class)->create([
             'date' => Carbon::now()->addYears(2),
+            'status' => 'published'
+        ]);
+        $nearingMission = factory(Mission::class)->create([
+            'date' => Carbon::now()->addYear(),
             'status' => 'published'
         ]);
 

@@ -29,3 +29,7 @@ img.object-fit-cover {
   overflow: hidden;
 }
 
+.owl-carousel .owl-dots .owl-dot.active {
+  background-color: #afa939;
+}
+

@@ -26,3 +26,7 @@ img.object-fit-cover {
         @include line_clamp(1)
     }
 }
+
+.owl-carousel .owl-dots .owl-dot.active {
+    background-color: #afa939;
+}

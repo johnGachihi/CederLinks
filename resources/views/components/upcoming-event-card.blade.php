@@ -1,4 +1,4 @@
-<div class="col-md-4 d-flex ftco-animate">
+<div class="d-flex ftco-animate">
     <div class="blog-entry justify-content-end">
         <div class="text px-4 py-4">
             <h3 class="heading mb-0 line-clamp-1"><a href="#">{{ $title ?? "..." }}</a></h3>
