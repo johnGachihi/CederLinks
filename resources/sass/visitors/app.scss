@@ -5,3 +5,24 @@ img.object-fit-cover {
 #register-tab .form-control, #login-tab .form-control {
     font-size: 16px;
 }
+
+@mixin line_clamp($n) {
+    -webkit-line-clamp: $n;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp {
+    &-3 {
+        @include line_clamp(3)
+    }
+
+    &-2 {
+        @include line_clamp(2)
+    }
+
+    &-1 {
+        @include line_clamp(1)
+    }
+}

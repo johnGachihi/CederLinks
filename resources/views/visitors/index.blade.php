@@ -140,27 +140,14 @@
             </div>
         </div>
         <div class="row d-flex">
-            <x-upcoming-event-card
-                title="South Africa Investor Mission"
-                :image="asset('storage/images/image_1.jpg')"
-                :date="\Carbon\Carbon::now()">
-                The event stated above will take place in the date shown and will be for investors.
-                e.t.c.
-            </x-upcoming-event-card>
-            <x-upcoming-event-card
-                title="Dubai Investor Mission"
-                :image="asset('storage/images/image_2.jpg')"
-                :date="\Carbon\Carbon::now()">
-                The event stated above will take place in the date shown and will be for investors.
-                e.t.c.
-            </x-upcoming-event-card>
-            <x-upcoming-event-card
-                title="Rift Valley Investor Mission"
-                :image="asset('storage/images/image_3.jpg')"
-                :date="\Carbon\Carbon::now()">
-                The event stated above will take place in the date shown and will be for investors.
-                e.t.c.
-            </x-upcoming-event-card>
+            @foreach ($missions as $mission)
+                <x-upcoming-event-card
+                    :title="$mission->title"
+                    :image="$mission->image"
+                    :date="$mission->date"
+                    :description-preview="$mission->description_preview"
+                ></x-upcoming-event-card>
+            @endforeach
         </div>
     </div>
 </section>

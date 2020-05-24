@@ -10,7 +10,7 @@ Route::get('/home', 'HomeController@index')->name('home');
  * Visitors' pages
 */
 Route::name('visitors.')->group(function () {
-    Route::view('/', 'visitors.index')->name('index');
+    Route::get('/', 'VisitorPagesController@index')->name('index');
     Route::view('/about', 'visitors.about')->name('about');
     Route::view('/services', 'visitors.services')->name('services');
     Route::view('/t&c', 'visitors.terms-and-conditions')->name('terms-and-conditions');

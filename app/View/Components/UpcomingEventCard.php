@@ -9,19 +9,19 @@ class UpcomingEventCard extends Component
 {
     // TODO: Once Mission/Event model is ready, pass in an instance of the model instead
 
-    public $title;
-    public $image;
-    private $date;
+    public ?string $title;
+    public ?string $image;
+    public ?string $descriptionPreview;
+    public ?Carbon $date;
 
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct(string $title, string $image, Carbon $date)
+    public function __construct(?string $title,
+                                ?string $image,
+                                ?string $descriptionPreview,
+                                $date)
     {
         $this->title = $title;
         $this->image = $image;
+        $this->descriptionPreview = $descriptionPreview;
         $this->date = $date;
     }
 
@@ -32,10 +32,6 @@ class UpcomingEventCard extends Component
      */
     public function render()
     {
-        return view('components.upcoming-event-card')->with([
-            'day' => $this->date->day,
-            'month' => $this->date->englishMonth,
-            'year' => $this->date->year
-        ]);
+        return view('components.upcoming-event-card');
     }
 }
