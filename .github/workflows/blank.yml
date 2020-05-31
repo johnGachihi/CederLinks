@@ -17,6 +17,7 @@ jobs:
       - name: Setup Laravel
         run: |
           echo ${{ secrets.DOT_ENV }} > .env
+          cat .env
 #           php artisan key:generate
         
 #       - name: Run phpunit tests
