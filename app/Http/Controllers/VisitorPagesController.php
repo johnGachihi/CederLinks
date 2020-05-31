@@ -19,4 +19,23 @@ class VisitorPagesController extends Controller
         return view("visitors.index")
             ->with("missions", $missions);
     }
+
+    public function single_mission($id)
+    {
+        $newest_missions = Mission::orderBy("date", "desc")
+            ->take(3)
+            ->get()
+            ->filter(fn($m) => $m->id != $id);
+
+        $approaching_missions = Mission::whereDate("date", ">", Carbon::now())
+            ->orderBy("date")
+            ->get()
+            ->filter(fn($m) => $m->id != $id)
+            ->take(3);
+
+        return view("visitors.single-mission")
+            ->with("mission", Mission::findOrFail($id))
+            ->with("newest_missions", $newest_missions)
+            ->with("approaching_missions", $approaching_missions);
+    }
 }

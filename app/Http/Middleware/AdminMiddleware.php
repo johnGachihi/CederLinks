@@ -27,6 +27,7 @@ class AdminMiddleware
     }
 
     private function isAdmin($user) {
+        //TODO: Check if this logic is correct
         return $user->type !== 'admin' || $user->type !== 'superadmin';
     }
 }

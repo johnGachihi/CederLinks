@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Mission;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -97,5 +98,192 @@ class VisitorPagesControllerTest extends TestCase
         $viewDataMissions = $response->viewData("missions");
         $this->assertEquals($nearingMission->id, $viewDataMissions[0]->id);
         $this->assertEquals($furtherMission->id, $viewDataMissions[1]->id);
+    }
+
+    public function test_single_mission_whenUserIsGuest()
+    {
+        $mission = factory(Mission::class)->create();
+
+        $response = $this->get("/mission/$mission->id");
+
+        $response->assertRedirect("/#login");
+    }
+
+    public function test_single_mission_whenUserIsMember()
+    {
+        $mission = factory(Mission::class)->create();
+        $user = factory(User::class)->create([
+            "type" => "member"
+        ]);
+
+        $response = $this->actingAs($user)->get("/mission/$mission->id");
+
+        $response->assertOk();
+    }
+
+    public function test_single_mission_whenUserIsAdmin()
+    {
+        $mission = factory(Mission::class)->create();
+        $user = factory(User::class)->create([
+            "type" => "admin"
+        ]);
+
+        $response = $this->actingAs($user)->get("/mission/$mission->id");
+
+        $response->assertOk();
+    }
+
+    public function test_single_mission_whenUserIsSuperAdmin()
+    {
+        $mission = factory(Mission::class)->create();
+        $user = factory(User::class)->create([
+            "type" => "superadmin"
+        ]);
+
+        $response = $this->actingAs($user)->get("/mission/$mission->id");
+
+        $response->assertOk();
+    }
+
+    public function test_single_mission_whenUserHasUnknownRole()
+    {
+        $mission = factory(Mission::class)->create();
+        $user = factory(User::class)->create([
+            "type" => "unknown-role"
+        ]);
+
+        $response = $this->actingAs($user)->get("/mission/$mission->id");
+
+        $response->assertRedirect("/#login");
+    }
+
+    public function test_single_mission_onNonExistentMission()
+    {
+        $user = factory(User::class)->create([
+            "type" => "member"
+        ]);
+
+        $response = $this->actingAs($user)->get("/mission/1");
+
+        $response->assertNotFound();
+    }
+
+    public function test_single_mission_containsMissionData()
+    {
+        $mission = factory(Mission::class)->create();
+        $user = factory(User::class)->create([
+            "type" => "member"
+        ]);
+
+        $response = $this->actingAs($user)->get("/mission/$mission->id");
+
+        $response->assertOk();
+        $response->assertViewIs("visitors.single-mission");
+        $response->assertViewHas("mission", $mission);
+    }
+
+    public function test_single_mission_containsAtMost3NewestMissionsDataOrderedFromNewestToOldest()
+    {
+        // WHEN
+        $missions = factory(Mission::class, 10)->create();
+        $sortedMissions = $missions->sortByDesc(fn($m) => $m->date);
+        $oldestMission = $sortedMissions->last();
+        $user = factory(User::class)->create([
+            "type" => "member"
+        ]);
+
+        // GIVEN
+        $response = $this->actingAs($user)->get("/mission/" . $oldestMission->id);
+
+        // THEN
+        $response->assertOk();
+
+        $expectedNewestMissions = $sortedMissions->take(3)->values();
+        $actualNewestMissions = $response->viewData("newest_missions");
+
+        $this->assertCount(3, $actualNewestMissions);
+        for ($i = 0; $i < 3; $i++) {
+            $this->assertEquals(
+                $expectedNewestMissions[$i]->id,
+                $actualNewestMissions[$i]->id
+            );
+        }
+    }
+
+    public function test_single_missions_NewestMissionsDataDoesNotIncludeCurrentMission()
+    {
+        $missions = factory(Mission::class, 3)->create();
+        $user = factory(User::class)->create([
+            "type" => "member"
+        ]);
+
+        $response = $this->actingAs($user)->get("/mission/" . $missions[0]->id);
+
+        $response->assertOk();
+        $this->assertFalse($response->viewData("newest_missions")->contains($missions[0]));
+    }
+
+    public function test_single_mission_approachingMissionsDataIsOfFutureMissionsInAscOrder()
+    {
+        // WHEN
+        $missions = factory(Mission::class, 10)->create();
+        $sortedMissions = $missions->sortBy(fn($m) => $m->date);
+        $latestMission = $sortedMissions->last();
+        $user = factory(User::class)->create([
+            "type" => "member"
+        ]);
+
+        // GIVEN
+        $response = $this->actingAs($user)->get("/mission/" . $latestMission->id);
+
+        // THEN
+        $response->assertOk();
+        $response->assertViewHas("approaching_missions");
+
+        $expectedApproachingMissions = $sortedMissions
+            ->filter(fn($m) => $m->date->isFuture())
+            ->values();
+        $actualApproachingMissions = $response->viewData("approaching_missions");
+
+        foreach ($actualApproachingMissions as $idx => $actualApproachingMission) {
+            $this->assertEquals(
+                $expectedApproachingMissions[$idx]->id,
+                $actualApproachingMission->id
+            );
+        }
+    }
+
+    public function test_single_blog_approachingMissionDataHasAtMost3Missions()
+    {
+        $missions = factory(Mission::class, 5)->create([
+            "date" => Carbon::now()->addDay()
+        ]);
+        $user = factory(User::class)->create([
+            "type" => "member"
+        ]);
+
+        $response = $this->actingAs($user)->get("/mission/" . $missions[0]->id);
+
+        $response->assertOk();
+        $approachingMissions = $response->viewData("approaching_missions");
+        $this->assertCount(3, $approachingMissions);
+    }
+
+    function test_single_mission_approachingMissionsDataDoesNotIncludeCurrentMission()
+    {
+        $currentMission = factory(Mission::class)->create([
+            "date" => Carbon::now()->addDay()
+        ]);
+        $otherMissions = factory(Mission::class, 5)->create([
+            "date" => Carbon::now()->addDays(2)
+        ]);
+        $user = factory(User::class)->create([
+            "type" => "member"
+        ]);
+
+        $response = $this->actingAs($user)->get("/mission/" . $currentMission->id);
+
+        $actualApproachingMissions = $response->viewData("approaching_missions");
+        $this->assertFalse($actualApproachingMissions->contains($currentMission));
     }
 }

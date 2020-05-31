@@ -2,27 +2,17 @@
 
 namespace App\View\Components;
 
+use App\Mission;
 use Carbon\Carbon;
 use Illuminate\View\Component;
 
 class UpcomingEventCard extends Component
 {
-    // TODO: Once Mission/Event model is ready, pass in an instance of the model instead
+    public Mission $mission;
 
-    public ?string $title;
-    public ?string $image;
-    public ?string $descriptionPreview;
-    public ?Carbon $date;
-
-    public function __construct(?string $title,
-                                ?string $image,
-                                ?string $descriptionPreview,
-                                $date)
+    public function __construct(Mission $mission)
     {
-        $this->title = $title;
-        $this->image = $image;
-        $this->descriptionPreview = $descriptionPreview;
-        $this->date = $date;
+        $this->mission = $mission;
     }
 
     /**

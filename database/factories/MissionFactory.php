@@ -20,7 +20,7 @@ if (!function_exists('makeDescription')) {
 $factory->define(Mission::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence,
-        'date' => $faker->date('Y-m-d H:i:s', '+1 year'),
+        'date' => $this->faker->dateTimeBetween("-1 year", "+2 year"),
         'description' => makeDescription($faker)
     ];
 });

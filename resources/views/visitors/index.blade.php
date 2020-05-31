@@ -143,12 +143,7 @@
                 <div class="col">
                     <div class="carousel-missions owl-carousel ftco-owl">
                         @foreach ($missions as $mission)
-                            <x-upcoming-event-card
-                                :title="$mission->title"
-                                :image="$mission->image"
-                                :date="$mission->date"
-                                :description-preview="$mission->description_preview"
-                            ></x-upcoming-event-card>
+                            <x-upcoming-event-card :mission="$mission"></x-upcoming-event-card>
                         @endforeach
                     </div>
                 </div>
