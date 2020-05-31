@@ -26,6 +26,8 @@ jobs:
         run: npm run test
         
       - name: Build js
+        env:
+          SASS_PATH: ./node_modules
         run: npm run prod
       
       - name: Compress project
