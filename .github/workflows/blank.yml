@@ -15,7 +15,7 @@ jobs:
         run: npm i
         
       - name: Setup Laravel for tests
-      - run: |
+        run: |
           cp .env.example .env
           php artisan key:generate
         
