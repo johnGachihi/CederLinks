@@ -26,8 +26,7 @@ function client(endpoint, data, customConfig = {}) {
     //     ...options,
     //     ...customConfig
     // }
-    console.log(`${process.env.REACT_APP_API_URL}/${endpoint}`)
-    return window.fetch(`${process.env.REACT_APP_API_URL}/${endpoint}`, options)
+    return window.fetch(`/${endpoint}`, options)
         .then(async res => {
             if (res.status === 401) {
                 redirectToLogin()
@@ -43,7 +42,7 @@ function client(endpoint, data, customConfig = {}) {
 }
 
 function redirectToLogin() {
-    window.location.assign(`${process.env.APP_URL}?login=true`)
+    window.location.assign(`/?login=true`)
 }
 
 export default client
