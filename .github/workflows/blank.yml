@@ -20,8 +20,8 @@ jobs:
           cat .env
           php artisan key:generate
         
-#       - name: Run phpunit tests
-#         run: vendor/bin/phpunit tests
+      - name: Run phpunit tests
+        run: vendor/bin/phpunit tests
       - name: Run jest tests
         run: npm run test
         
