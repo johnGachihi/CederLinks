@@ -36,7 +36,9 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('admin.index') }}">Administrate</a>
+                            @if(Auth::user()->type === "admin" || Auth::user()->type === "superadmin")
+                                <a class="dropdown-item" href="{{ route('admin.index') }}">Administrate</a>
+                            @endif
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
