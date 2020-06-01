@@ -80,7 +80,7 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         try {
-            $this->traitRegister($request);
+            return $this->traitRegister($request);
         } catch (ValidationException $e) {
             $e->errorBag('register');
             throw $e;
