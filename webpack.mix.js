@@ -42,6 +42,3 @@ mix.webpackConfig(webpack => {
 
     return {plugins: [new webpack.DefinePlugin(envKeys)]}
 })
-
-const endpoint = "admin/me"
-console.log(`${process.env.REACT_APP_API_URL}/${endpoint}`)

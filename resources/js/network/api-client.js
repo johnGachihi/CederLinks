@@ -26,7 +26,7 @@ function client(endpoint, data, customConfig = {}) {
     //     ...options,
     //     ...customConfig
     // }
-
+    console.log(`${process.env.REACT_APP_API_URL}/${endpoint}`)
     return window.fetch(`${process.env.REACT_APP_API_URL}/${endpoint}`, options)
         .then(async res => {
             if (res.status === 401) {
