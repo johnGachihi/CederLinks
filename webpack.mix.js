@@ -44,6 +44,9 @@ mix.webpackConfig(webpack => {
     if (envKeys["process.env.REACT_APP_API_URL"] == undefined) {
         envKeys["process.env.REACT_APP_API_URL"] = JSON.stringify(process.env.REACT_APP_API_URL)
     }
+    if (envKeys["process.env.IMAGES_URL"] == undefined) {
+        envKeys["process.env.IMAGES_URL"] = JSON.stringify(process.env.IMAGES_URL)
+    }
 
     return { plugins: [new webpack.DefinePlugin(envKeys)] };
 });
