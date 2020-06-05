@@ -42,7 +42,7 @@ mix.webpackConfig(webpack => {
     }, {});
 
     if (envKeys["process.env.REACT_APP_API_URL"] == undefined) {
-        envKeys["process.env.REACT_APP_API_URL"] = process.env.REACT_APP_API_URL
+        envKeys["process.env.REACT_APP_API_URL"] = JSON.stringify(process.env.REACT_APP_API_URL)
     }
 
     return { plugins: [new webpack.DefinePlugin(envKeys)] };
