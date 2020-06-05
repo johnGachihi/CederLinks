@@ -26,7 +26,7 @@ function client(endpoint, data, customConfig = {}) {
     //     ...options,
     //     ...customConfig
     // }
-    return window.fetch(`${endpoint}`, options)
+    return window.fetch(`/${endpoint}`, options)
         .then(async res => {
             if (res.status === 401) {
                 redirectToLogin()
