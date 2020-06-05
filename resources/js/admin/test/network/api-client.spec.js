@@ -62,7 +62,7 @@ describe('test client calls window.fetch with correct arguments', () => {
 
     test('url', () => {
         return client('whatever/1').then(() => {
-            expect(fetch.mock.calls[0][0]).toBe(`whatever/1`)
+            expect(fetch.mock.calls[0][0]).toBe(`/whatever/1`)
         })
     })
 
