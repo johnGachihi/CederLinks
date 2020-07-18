@@ -246,6 +246,14 @@
     </script>
 @endif
 
+@if(session("unauthenticated"))
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            $("#auth-modal").modal("show")
+            console.log("The hash is #login")
+        })
+    </script>
+@endif
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>

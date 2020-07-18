@@ -18613,6 +18613,10 @@ __webpack_require__(/*! ./auth-modal */ "./resources/js/visitors/auth-modal.js")
 __webpack_require__(/*! ./recapture-callbacks */ "./resources/js/visitors/recapture-callbacks.js");
 
 
+/**/
+
+/**/
+
 AOS.init({
   duration: 800,
   easing: 'slide'
