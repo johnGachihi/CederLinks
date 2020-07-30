@@ -5,7 +5,7 @@
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
              data-scrollax-parent="true">
             <div class="col-md-6 ftco-animate">
-                <h2 class="subheading">Welcome To CederLinks</h2>
+                <h2 class="subheading">Welcome To Ceder Links</h2>
                 <h1>
                     We Provide Highest Quality
                     <span class="txt-rotate" data-period="2000" data-rotate='[ "Investments.", "Networks.", "Services.", "Returns." ]'></span>

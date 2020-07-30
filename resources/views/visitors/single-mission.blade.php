@@ -22,7 +22,7 @@
                 <h2 class="mb-3">{{ $mission->title }}</h2>
                 {!! $mission->description !!}
                 <div class="pt-5 mt-5">
-                    <h3 class="mb-5">Comments coming soon</h3>
+                    <h3 class="mb-5">No comments yet!</h3>
                     <!-- <h3 class="mb-5">6 Comments</h3> -->
                     <!--
                     <ul class="comment-list">
