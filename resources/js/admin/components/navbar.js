@@ -5,7 +5,7 @@ function Navbar() {
     return (
         <nav className="_navbar_">
             <div className="container">
-                <a className="navbar-brand" href={`${process.env.APP_URL}`}>CederLinks</a>
+                <a className="navbar-brand" href={`${process.env.APP_URL}`}>Ceder Links</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                         aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="oi oi-menu"></span> Menu
