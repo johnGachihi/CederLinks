@@ -36,20 +36,20 @@ mix.sass("resources/sass/common/common.scss", "public/css/common");
 /** Setup .env file for js */
 mix.webpackConfig(webpack => {
     const env = dotenv.config().parsed;
-    const envKeys = Object.keys(env).reduce((prev, next) => {
-        prev[`process.env.${next}`] = JSON.stringify(env[next]);
-        return prev;
-    }, {});
+    if (env !== undefined) {
+        const envKeys = Object.keys(env).reduce((prev, next) => {
+            prev[`process.env.${next}`] = JSON.stringify(env[next]);
+            return prev;
+        }, {});
 
-    if (envKeys["process.env.REACT_APP_API_URL"] == undefined) {
-        envKeys["process.env.REACT_APP_API_URL"] = JSON.stringify(process.env.REACT_APP_API_URL)
-    }
-    if (envKeys["process.env.IMAGES_URL"] == undefined) {
-        envKeys["process.env.IMAGES_URL"] = JSON.stringify(process.env.IMAGES_URL)
-    }
-    if (envKeys["process.env.APP_URL"] == undefined) {
-        envKeys["process.env.APP_URL"] = JSON.stringify(process.env.APP_URL)
+        return {plugins: [new webpack.DefinePlugin(envKeys)]};
+    } else {
+        const envKeys = {}
+        envKeys['process.env.REACT_APP_API_URL'] = JSON.stringify(process.env.REACT_APP_API_URL);
+        envKeys['process.env.APP_URL'] = JSON.stringify(process.env.APP_URL)
+        envKeys['process.env.IMAGES_URL'] = JSON.stringify(process.env.IMAGES_URL)
+        envKeys['process.env.SASS_PATH'] = JSON.stringify(process.env.SASS_PATH)
+        return {plugins: [new webpack.DefinePlugin(envKeys)]}
     }
 
-    return { plugins: [new webpack.DefinePlugin(envKeys)] };
 });
