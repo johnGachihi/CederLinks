@@ -45,10 +45,10 @@ mix.webpackConfig(webpack => {
         return {plugins: [new webpack.DefinePlugin(envKeys)]};
     } else {
         const envKeys = {}
-        envKeys['REACT_APP_API_URL'] = "https://cederlink.johngachihi.com"
-        envKeys['APP_URL'] = "https://cederlink.johngachihi.com"
-        envKeys['IMAGES_URL'] = "https://cederlink.johngachihi.com/storage/images"
-        envKeys['SASS_PATH'] = "./node_modules"
+        envKeys['process.env.REACT_APP_API_URL'] = process.env.REACT_APP_API_URL
+        envKeys['process.env.APP_URL'] = process.env.APP_URL
+        envKeys['process.env.IMAGES_URL'] = process.env.IMAGES_URL
+        envKeys['process.env.SASS_PATH'] = process.env.SASS_PATH
         return {plugins: [new webpack.DefinePlugin(envKeys)]}
     }
 
