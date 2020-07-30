@@ -16,6 +16,7 @@ Route::name('visitors.')->group(function () {
     Route::view('/t&c', 'visitors.terms-and-conditions')->name('terms-and-conditions');
     Route::view('/team', 'visitors.team')->name('team');
     Route::view('/contact', 'visitors.contact')->name('contact');
+    Route::view('/partners', 'visitors.partners')->name('partners');
 
     Route::middleware(['member'])->group(function () {
         Route::get('/mission/{id}', 'VisitorPagesController@single_mission')->name('single-mission');

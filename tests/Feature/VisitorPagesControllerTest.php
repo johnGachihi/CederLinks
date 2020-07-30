@@ -298,4 +298,11 @@ class VisitorPagesControllerTest extends TestCase
         $response = $this->get("/contact");
         $response->assertViewIs("visitors.contact");
     }
+
+    public function test_partners()
+    {
+        $response = $this->get("/partners");
+        $response->assertViewIs("visitors.partners");
+    }
+
 }
