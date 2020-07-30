@@ -46,7 +46,8 @@ mix.webpackConfig(webpack => {
     } else {
         const envKeys = {}
         envKeys['process.env'] = {...process.env}
-        return {plugins: [new webpack.DefinePlugin(envKeys)]};
+        console.log(envKeys);
+        return {plugins: [new webpack.DefinePlugin(envKeys)]}
     }
 
 });
