@@ -36,6 +36,7 @@ mix.sass("resources/sass/common/common.scss", "public/css/common");
 /** Setup .env file for js */
 mix.webpackConfig(webpack => {
     const env = dotenv.config().parsed;
+    console.log("------*********-----------", env);
     const envKeys = Object.keys(env).reduce((prev, next) => {
         prev[`process.env.${next}`] = JSON.stringify(env[next]);
         return prev;
