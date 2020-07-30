@@ -45,10 +45,10 @@ mix.webpackConfig(webpack => {
         return {plugins: [new webpack.DefinePlugin(envKeys)]};
     } else {
         const envKeys = {}
-        envKeys['process.env.REACT_APP_API_URL'] = process.env.REACT_APP_API_URL
-        envKeys['process.env.APP_URL'] = process.env.APP_URL
-        envKeys['process.env.IMAGES_URL'] = process.env.IMAGES_URL
-        envKeys['process.env.SASS_PATH'] = process.env.SASS_PATH
+        envKeys['process.env.REACT_APP_API_URL'] = JSON.stringify(process.env.REACT_APP_API_URL);
+        envKeys['process.env.APP_URL'] = JSON.stringify(process.env.APP_URL)
+        envKeys['process.env.IMAGES_URL'] = JSON.stringify(process.env.IMAGES_URL)
+        envKeys['process.env.SASS_PATH'] = JSON.stringify(process.env.SASS_PATH)
         return {plugins: [new webpack.DefinePlugin(envKeys)]}
     }
 
