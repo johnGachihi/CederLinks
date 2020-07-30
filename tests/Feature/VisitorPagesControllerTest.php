@@ -286,4 +286,10 @@ class VisitorPagesControllerTest extends TestCase
         $actualApproachingMissions = $response->viewData("approaching_missions");
         $this->assertFalse($actualApproachingMissions->contains($currentMission));
     }
+
+    public function test_team()
+    {
+        $response = $this->get("/team");
+        $response->assertViewIs("visitors.team");
+    }
 }

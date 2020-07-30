@@ -12,7 +12,8 @@
                     $links = [
                         'Home' => 'visitors.index',
                         'About' => 'visitors.about',
-                        'Services' => 'visitors.services'
+                        'Services' => 'visitors.services',
+                        'Team' => 'visitors.team'
                     ];
                 @endphp
                 @foreach($links as $pageName => $route)
@@ -20,9 +21,6 @@
                         <a href="{{ route($route) }}" class="nav-link">{{ $pageName }}</a>
                     </li>
                 @endforeach
-                <li class="nav-item"><a href="attorneys.html" class="nav-link">Team</a></li>
-{{--                <li class="nav-item"><a href="calender.html" class="nav-link">Missions</a></li>--}}
-{{--                <li class="nav-item"><a href="blog.html" class="nav-link">Upcoming</a></li>--}}
                 <li class="nav-item"><a href="partners.html" class="nav-link">Partners</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
                 @guest
