@@ -44,11 +44,8 @@ mix.webpackConfig(webpack => {
 
         return {plugins: [new webpack.DefinePlugin(envKeys)]};
     } else {
-        const envKeys = {...process}
-        return {plugins: [new webpack.DefinePlugin(envKeys)]};
-
-        // const envKeys = process.env;
-        // envKeys["process.env.REACT_APP_API_URL"] = JSON.stringify(process.env)
+        // const envKeys = {...process}
+        // return {plugins: [new webpack.DefinePlugin(envKeys)]};
     }
 
 });
