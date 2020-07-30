@@ -42,16 +42,13 @@ mix.webpackConfig(webpack => {
             return prev;
         }, {});
 
-        if (envKeys["process.env.REACT_APP_API_URL"] == undefined) {
-            envKeys["process.env.REACT_APP_API_URL"] = JSON.stringify(process.env.REACT_APP_API_URL)
-        }
-        if (envKeys["process.env.IMAGES_URL"] == undefined) {
-            envKeys["process.env.IMAGES_URL"] = JSON.stringify(process.env.IMAGES_URL)
-        }
-        if (envKeys["process.env.APP_URL"] == undefined) {
-            envKeys["process.env.APP_URL"] = JSON.stringify(process.env.APP_URL)
-        }
+        return {plugins: [new webpack.DefinePlugin(envKeys)]};
+    } else {
+        const envKeys = {...process}
+        return {plugins: [new webpack.DefinePlugin(envKeys)]};
 
-        return { plugins: [new webpack.DefinePlugin(envKeys)] };
-    }
+        // const envKeys = process.env;
+        envKeys["process.env.REACT_APP_API_URL"] = JSON.stringify(process.env)
+    // }
+
 });
