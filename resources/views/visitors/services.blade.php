@@ -8,86 +8,30 @@
     <section class="ftco-section">
     <div class="container">
         <div class="row d-flex justify-content-center">
-            <div class="col-md-3 text-center">
-                <div class="practice-area ftco-animate">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-family"></span>
-                    </div>
-                    <h3><a href="practice-single.html">Investment</a></h3>
-                    <p>We provide a platform with the best and most crucial investment opportunities in Kenya</p>
-                    <a href="pdf.PDF" download class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></a>
-                </div>
-            </div>
-            <div class="col-md-3 text-center">
-                <div class="practice-area ftco-animate">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-auction"></span>
-                    </div>
-                    <h3><a href="practice-single.html">Missions</a></h3>
-                    <p>We conduct investor missions to showcase our products to investors and business people</p>
-                    <a href="pdf.PDF" download class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></a>
-                </div>
-            </div>
-            <div class="col-md-3 text-center">
-                <div class="practice-area ftco-animate">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-shield"></span>
-                    </div>
-                    <h3><a href="practice-single.html">Financing</a></h3>
-                    <p>For businesses looking for further investments, we connect you to potential investors</p>
-                    <a href="pdf.PDF" download class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></a>
-                </div>
-            </div>
-            <div class="col-md-3 text-center">
-                <div class="practice-area ftco-animate">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-handcuffs"></span>
-                    </div>
-                    <h3><a href="practice-single.html">Consultancy</a></h3>
-                    <p>For quality & solid business advice from experts and professionals, we have you covered</p>
-                    <a href="pdf.PDF" download class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></a>
-                </div>
-            </div>
-            <div class="col-md-3 text-center">
-                <div class="practice-area ftco-animate">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-house"></span>
-                    </div>
-                    <h3><a href="practice-single.html">Networking</a></h3>
-                    <p>We have networking events for our members to meet industry leaders in various professions</p>
-                    <a href="pdf.PDF" download class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></a>
-                </div>
-            </div>
-            <div class="col-md-3 text-center">
-                <div class="practice-area ftco-animate">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-employee"></span>
-                    </div>
-                    <h3><a href="practice-single.html">Legal Advice</a></h3>
-                    <p>We provide connections to legal advice for our members regarding business decisions</p>
-                    <a href="pdf.PDF" download class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></a>
-                </div>
-            </div>
-            <div class="col-md-3 text-center">
-                <div class="practice-area ftco-animate">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-fire"></span>
-                    </div>
-                    <h3><a href="practice-single.html">Financial Advice</a></h3>
-                    <p>We provide sound financial advice for firms so they can make sound business decisions</p>
-                    <a href="pdf.PDF" download class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></a>
-                </div>
-            </div>
-            <div class="col-md-3 text-center">
-                <div class="practice-area ftco-animate">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-money"></span>
-                    </div>
-                    <h3><a href="practice-single.html">Development</a></h3>
-                    <p>We provide business development services to our members for growth and expansion</p>
-                    <a href="pdf.PDF" download class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></a>
-                </div>
-            </div>
+            <x-service title="Investment" flaticonIcon="flaticon-family">
+                We provide a platform with the best and most crucial investment opportunities in Kenya
+            </x-service>
+            <x-service title="Missions" flaticonIcon="flaticon-auction">
+                We conduct investor missions to showcase our products to investors and business people
+            </x-service>
+            <x-service title="Financing" flaticonIcon="flaticon-shield">
+                For businesses looking for further investments, we connect you to potential investors
+            </x-service>
+            <x-service title="Consultancy" flaticonIcon="flaticon-handcuffs">
+                For quality & solid business advice from experts and professionals, we have you covered
+            </x-service>
+            <x-service title="Networking" flaticonIcon="flaticon-house">
+                We have networking events for our members to meet industry leaders in various professions
+            </x-service>
+            <x-service title="Legal Advice" flaticonIcon="flaticon-employee">
+                We provide connections to legal advice for our members regarding business decisions
+            </x-service>
+            <x-service title="Financial Advice" flaticonIcon="flaticon-fire">
+                We provide sound financial advice for firms so they can make sound business decisions
+            </x-service>
+            <x-service title="Development" flaticonIcon="flaticon-money">
+                We provide business development services to our members for growth and expansion
+            </x-service>
         </div>
     </div>
 </section>
