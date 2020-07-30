@@ -50,22 +50,36 @@
                 <div class="ftco-footer-widget mb-4 ml-md-5">
                     <h2 class="ftco-heading-2">Practice Areas</h2>
                     <ul class="list-unstyled">
-                        <li><a href="Terms & Conditions.html" class="py-1 d-block"><span
-                                    class="ion-ios-arrow-forward mr-3"></span>Terms & Conditions</a></li>
-                        <li><a href="Partner Policies.html" class="py-1 d-block"><span
-                                    class="ion-ios-arrow-forward mr-3"></span>Partner Policies</a></li>
-                        <li><a href="Membership Policy.html" class="py-1 d-block"><span
-                                    class="ion-ios-arrow-forward mr-3"></span>Membership Policy</a></li>
-                        <li><a href="Event's Calender.html" class="py-1 d-block"><span
-                                    class="ion-ios-arrow-forward mr-3"></span>Events Calendar</a></li>
-                        <li><a href="attorneys.html" class="py-1 d-block"><span
-                                    class="ion-ios-arrow-forward mr-3"></span>Our Team</a></li>
-                        <li><a href="about.html" class="py-1 d-block"><span class="ion-ios-arrow-forward mr-3"></span>About
-                                Us</a></li>
-                        <li><a href="practice-areas.html" class="py-1 d-block"><span
-                                    class="ion-ios-arrow-forward mr-3"></span>Our Services</a></li>
-                        <li><a href="contact.html" class="py-1 d-block"><span class="ion-ios-arrow-forward mr-3"></span>Contact
-                                Us</a></li>
+                        <li>
+                            <a href="{{ route('visitors.terms-and-conditions') }}" class="py-1 d-block">
+                                <span class="ion-ios-arrow-forward mr-3"></span>Terms & Conditions
+                            </a>
+                        </li>
+                        <li>
+{{--                            <a class="py-1 d-block">--}}
+                                <span class="ion-ios-arrow-forward mr-3"></span>Membership Policy
+{{--                            </a>--}}
+                        </li>
+                        <li>
+                            <a href="{{ route('visitors.team') }}" class="py-1 d-block">
+                                <span class="ion-ios-arrow-forward mr-3"></span>Our Team
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('visitors.about') }}" class="py-1 d-block">
+                                <span class="ion-ios-arrow-forward mr-3"></span>About Us
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('visitors.services') }}" class="py-1 d-block">
+                                <span class="ion-ios-arrow-forward mr-3"></span>Our Services
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('visitors.contact') }}" class="py-1 d-block">
+                                <span class="ion-ios-arrow-forward mr-3"></span>Contact Us
+                            </a>
+                        </li>
 
                     </ul>
                 </div>
@@ -90,16 +104,11 @@
                     <div class="opening-hours">
                         <h4>Opening Days:</h4>
                         <p class="pl-3">
-                            <span>Mon  8:00am-4:00pm</span><br>
-                            <span>Tues 8:00am-4:00pm</span><br>
-                            <span>Wed  8:00-4:00pm</span><br>
-                            <span>Thur 8:00am-4:00pm</span><br>
-                            <span>Fri  8:00am-4:00pm</span><br>
-                            <span>Sat  9:00am-3:00pm</span><br>
+                            <span>Mon-Sat, 24/7</span><br>
                         </p>
                         <h4>Closed Days:</h4>
                         <p class="pl-3">
-                            <span>All Sunday Days</span><br>
+                            <span>All Sundays</span><br>
                             <span>All Public Holidays</span>
                         </p>
                     </div>
@@ -110,7 +119,7 @@
             <div class="col-md-12 text-center">
 
                 <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright Cedarlinks Limited &copy;
+                    Copyright Ceder Links Limited &copy;
                     <script>document.write(new Date().getFullYear());</script>
                     All rights reserved</a>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
