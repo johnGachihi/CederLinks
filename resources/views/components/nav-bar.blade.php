@@ -25,7 +25,7 @@
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
                 @guest
                     <li class="nav-item cta">
-                        <a id="auth-modal-show" href="/#" class="nav-link">Member Login</a>
+                        <a href="/#" class="nav-link _auth-modal-show">Member Login</a>
                     </li>
                 @else
                     <li class="nav-item dropdown">

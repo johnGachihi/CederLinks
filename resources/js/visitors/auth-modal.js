@@ -29,9 +29,13 @@ function enterLoginState() {
 }
 
 
-$('#auth-modal-show').on('click', e => {
+$('._auth-modal-show').on('click', e => {
     e.preventDefault();
     $('#auth-modal').modal();
+
+    if ($(e.currentTarget).hasClass("register")) {
+        enterRegistrationState();
+    }
 });
 
 $('#registration-form').on('submit', function (e) {

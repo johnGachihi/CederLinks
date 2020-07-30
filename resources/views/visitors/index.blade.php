@@ -12,9 +12,12 @@
                 <div class="col-lg-3 py-5">
                     <div class="heading-section ftco-animate">
                         <span class="subheading">Services</span>
-                        <h2 class="mb-4">Why Select Us?</h2>
-                        <p>We have provide access to high quality investment options in Kenya and East Africa. You will
-                            specifically enjoy our excellent customer service and the easy access to our services.</p>
+                        <h2 class="mb-4">Why choose us?</h2>
+                        <p>
+                            We organize for trade missions, business conferences
+                            and forums through B2B, B2C, B2G and G2G respectively,
+                            both with local and global partners.
+                        </p>
                         <p><a href="#linktotop" class="btn btn-primary py-3 px-4">Free Consultation</a></p>
                     </div>
                 </div>
@@ -75,23 +78,21 @@
             <div class="row">
                 <x-staff-card :image="asset('storage/images/person_1.jpg')"
                               name="Rebecca Kim" occupation="Director">
-                    With experience of over 10 years in expert investment, Ms. Rebecca Kimeto is the
-                    director and Chief Executive Officer of CederLinks Investment Ltd.
-                </x-staff-card>
-                <x-staff-card :image="asset('storage/images/person_2.jpg')"
-                              name="Linda Chebet" occupation="Office Manager">
-                    Ms. Linda Chebet is the office manager responsible for all office operations and
-                    appointments. She has experience in Management and customer experience.
-                </x-staff-card>
-                <x-staff-card :image="asset('storage/images/person_3.jpg')"
-                              name="Mutai Kiprono" occupation="IT Expert">
-                    Mr. Mutai Kiprono is a full stack developer with years of experience in web
-                    development and mobile app development and is in charge of all IT functions.
+                    With experience of over 10 years in expert investment, Ms.
+                    Rebecca Kimeto is the director and Chief Executive Officer
+                    of CederLinks Investment Ltd.
                 </x-staff-card>
                 <x-staff-card :image="asset('storage/images/person_4.jpg')"
-                              name="Jack Kipchumba" occupation="Secretary">
-                    Mr. Jack Kipchumba is the secretary in charge of all day to day functions in the
-                    company and works with everyone to ensure smooth operations at Ceder Links.
+                              name="Jared Kimetto" occupation="Director/Co-founder">
+                    Mr. Jared Kimetto is the second company director at Ceder Links.
+                    With experience in business management he has the qualifications
+                    for directing company operations.
+                </x-staff-card>
+                <x-staff-card :image="asset('storage/images/person_3.jpg')"
+                              name="Ercan Engin" occupation="Chairman">
+                    Mr.Ercan Engin is the company's chairman and is in charge of
+                    operations and board decisions. He has 15 years experience in
+                    company management.
                 </x-staff-card>
             </div>
         </div>

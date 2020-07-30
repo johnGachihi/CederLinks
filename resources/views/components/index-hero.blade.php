@@ -10,10 +10,19 @@
                     We Provide Highest Quality
                     <span class="txt-rotate" data-period="2000" data-rotate='[ "Investments.", "Networks.", "Services.", "Returns." ]'></span>
                 </h1>
-                <p class="mb-4">We are the best and most highly rated investment platform in Kenya. Join us to day to
-                    start your journey to high return investment.</p>
-                <p><a href="practice-single.html" class="btn btn-primary mr-md-4 py-2 px-4">Become a Member <span
-                            class="ion-ios-arrow-forward"></span></a></p>
+                <p class="mb-4">
+                    Join us to day to start your journey to high return
+                    investment. We are a leading business and investment
+                    platform, using over 60 years’ experience in Kenya to
+                    provide our members with unique information and
+                    exposure to business opportunities.
+                </p>
+                <p>
+                    <a href="#" class="btn btn-primary mr-md-4 py-2 px-4 _auth-modal-show register">
+                        Become a Member
+                        <span class="ion-ios-arrow-forward"></span>
+                    </a>
+                </p>
             </div>
         </div>
     </div>

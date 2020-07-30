@@ -12,10 +12,24 @@
             <div class="col-md-6 half p-3 py-5 pl-md-5 ftco-animate heading-section heading-section-white">
                 <span class="subheading">Who are we?</span>
                 <h2 class="mb-4">About Us</h2>
-                <p>CederLinks is a Nairobi based investment company that provides a platform for investors to meet business people and increase their investment portfolio.</p>
-                <p>We capitalize on the niche of a higher demand for diversified investment options for businesses, families and individuals and focus to cater to this need.</p>
-                <p>For investors, we simplify the process of identifying the best and most profitable options for investments. This leads to higher return rates and better decision making skills.</p>
-                <p>For business people, we provide options for geting further investments into their businesses in order to grow and mature their businesses and the economy at large. </p>
+                <p>
+                    CEDER LINKS LIMITED is a Kenyan Incorporated
+                    limited company since the year 2013.
+                </p>
+                <p>
+                    The core of our business is linking the world
+                    to African opportunities. From 2013 to 2018, we
+                    established liaison offices in some parts of
+                    Africa namely Uganda, Tanzania, Democratic
+                    Republic of Congo, Ethiopia, Malawi, Ghana,
+                    Zimbabwe and Egypt.
+                </p>
+                <p>
+                    In 2019, we extended our operations to Rwanda,
+                    Zambia, Namibia, Botswana, Nigeria and South Africa.
+                    This year, 2020, we are aggressively diversifying to
+                    the rest of the countries in Africa.
+                </p>
             </div>
         </div>
     </div>
@@ -34,19 +48,27 @@
                 <div class="carousel-testimony owl-carousel ftco-owl">
                     <x-testimonial-card
                         :image="asset('storage/images/person_5.jpg')"
-                        name="John Karanja" position="Director">
-                        I am impressed by this work and I would like to convey my gratitude and thanks.
-                        I now have very diverse investments.
+                        name="Selim S. Benbasat" position="Owner and founder Ennovation group">
+                        Ceder Links  especially are the jewel of the crown
+                        in Kenya. My first visit to Kenya was planned for 2
+                        days and soon enough I find my self remaining for
+                        10 days, with a serious link to many surrounding
+                        countries. Thanks Ceder Links  for being my family
+                        in Kenya.
                     </x-testimonial-card>
                     <x-testimonial-card
                         :image="asset('storage/images/person_8.jpg')"
-                        name="Roger Scott" position="C.E.O.">
-                        We were afraid of going into real estate investments without proper investments, but we got all the help needed.
+                        name="Mustafa" position="Egypt">
+                        I would recommend Ceder Links to any investors
+                        looking for solid and high quality investments
+                        for business. I joined and am not looking back.
                     </x-testimonial-card>
                     <x-testimonial-card
                         :image="asset('storage/images/person_7.jpg')"
                         name="Joe Maina" position="Manager">
-                        I would recommend CederLinks to any investors looking for solid and high quality investments for business. I joined and am not looking back.
+                        We have truly made a lot of positive changes
+                        and progress with Ceder Links in the past few
+                        years and I am very happy.
                     </x-testimonial-card>
                     <x-testimonial-card
                         :image="asset('storage/images/person_6.jpg')"
@@ -77,8 +99,8 @@
             <div class="col-md-6 pl-md-5 py-md-5">
                 <div class="row justify-content-start pt-3 pb-3">
                     <div class="col-md-12 heading-section ftco-animate">
-                        <span class="subheading">Welcome to CederLinks</span>
-                        <h2 class="mb-4">We Always Fight For Your Justice to Win</h2>
+                        <span class="subheading">Welcome to Ceder Links</span>
+                        <h2 class="mb-4">Best Business Opportunities for You</h2>
                         <p>Our mission, vision and values are our guiding principles in all our decisions and are based on ethics and goodwill.</p>
                         <div class="tabulation-2 mt-4">
                             <ul class="nav nav-pills nav-fill d-md-flex d-block">
