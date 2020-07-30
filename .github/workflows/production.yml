@@ -44,6 +44,7 @@ jobs:
       - name: Build js
         env:
           REACT_APP_API_URL: "https://cederlink.johngachihi.com"
+          APP_URL: "https://cederlink.johngachihi.com"
           IMAGES_URL: "https://cederlink.johngachihi.com/storage/images"
           SASS_PATH: ./node_modules
         run: npm run prod
