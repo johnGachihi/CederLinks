@@ -47,6 +47,9 @@ mix.webpackConfig(webpack => {
     if (envKeys["process.env.IMAGES_URL"] == undefined) {
         envKeys["process.env.IMAGES_URL"] = JSON.stringify(process.env.IMAGES_URL)
     }
+    if (envKeys["process.env.APP_URL"] == undefined) {
+        envKeys["process.env.APP_URL"] = JSON.stringify(process.env.APP_URL)
+    }
 
     return { plugins: [new webpack.DefinePlugin(envKeys)] };
 });

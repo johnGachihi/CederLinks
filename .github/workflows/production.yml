@@ -35,9 +35,6 @@ jobs:
       - name: Run phpunit tests
         run: vendor/bin/phpunit tests
 
-      - name: Remove temp .env
-        run: rm .env
-
       - name: Run jest tests
         run: npm run test
 
