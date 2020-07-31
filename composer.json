@@ -17,7 +17,8 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
-        "paquettg/php-html-parser": "^2.2"
+        "paquettg/php-html-parser": "^2.2",
+        "thedoctor0/laravel-mailjet-driver": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",
