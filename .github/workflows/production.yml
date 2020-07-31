@@ -31,11 +31,14 @@ jobs:
           rm .env
 
 
+      - name: Compress vendor
+        run: zip -r vendor.zip vendor
+
       - name: Upload vendor
         uses: actions/upload-artifact@v2
         with:
           name: vendor
-          path: vendor
+          path: vendor.zip
 
   build-test-js:
     runs-on: ubuntu-latest
@@ -73,10 +76,16 @@ jobs:
         with:
           name: vendor
 
+      - name: Extract vendor
+        run: |
+          unzip vendor.zip
+          rm vendor.zip
+
       - name: Download public
         uses: actions/download-artifact@v2
         with:
           name: public
+          path: public
 
       - name: Debug
         run: ls
