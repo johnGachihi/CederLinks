@@ -189,21 +189,21 @@
                             <h3>Important Links</h3>
                             <li><a href="Terms & Conditions.html">Terms & Conditions<span
                                         class="ion-ios-arrow-forward"></span></a></li>
-                            <li><a href="Partner Policies.html">Partner Policies<span
+                            {{--<li><a href="Partner Policies.html">Partner Policies<span
+                                        class="ion-ios-arrow-forward"></span></a></li>--}}
+                            {{--<li><a href="Membership Policy.html">Membership Policy<span
+                                        class="ion-ios-arrow-forward"></span></a></li>--}}
+                            {{--<li><a href="Event's Calender.html">Events Calender<span
+                                        class="ion-ios-arrow-forward"></span></a></li>--}}
+                            <li><a href="{{ route('visitors.team') }}">Our Team<span class="ion-ios-arrow-forward"></span></a></li>
+                            <li><a href="{{ route('visitors.about') }}">About Us<span class="ion-ios-arrow-forward"></span></a></li>
+                            <li><a href="{{ route('visitors.services') }}">Our Services<span
                                         class="ion-ios-arrow-forward"></span></a></li>
-                            <li><a href="Membership Policy.html">Membership Policy<span
-                                        class="ion-ios-arrow-forward"></span></a></li>
-                            <li><a href="Event's Calender.html">Events Calender<span
-                                        class="ion-ios-arrow-forward"></span></a></li>
-                            <li><a href="attorneys.html">Our Team<span class="ion-ios-arrow-forward"></span></a></li>
-                            <li><a href="about.html">About Us<span class="ion-ios-arrow-forward"></span></a></li>
-                            <li><a href="practice-areas.html">Our Services<span
-                                        class="ion-ios-arrow-forward"></span></a></li>
-                            <li><a href="contact.html">Contact Us<span class="ion-ios-arrow-forward"></span></a></li>
+                            <li><a href="{{ route('visitors.contact') }}">Contact Us<span class="ion-ios-arrow-forward"></span></a></li>
                         </div>
                     </div>
 
-                    <div class="sidebar-box ftco-animate">
+                    {{--<div class="sidebar-box ftco-animate">
                         <h3>Upcoming Events</h3>
                         <div class="block-21 mb-4 d-flex">
                             <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
@@ -217,31 +217,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                            <div class="text">
-                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the
-                                        blind texts</a></h3>
-                                <div class="meta">
-                                    <div><a href="#"><span class="icon-calendar"></span> Oct. 18, 2019</a></div>
-                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                            <div class="text">
-                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the
-                                        blind texts</a></h3>
-                                <div class="meta">
-                                    <div><a href="#"><span class="icon-calendar"></span> Oct. 18, 2019</a></div>
-                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div>--}}
 
                     <div class="sidebar-box ftco-animate">
                         <h3>About Us</h3>
