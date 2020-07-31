@@ -30,7 +30,6 @@ jobs:
           vendor/bin/phpunit tests
           rm .env
 
-
       - name: Compress vendor
         run: zip -r vendor.zip vendor
 
@@ -88,7 +87,7 @@ jobs:
           path: public
 
       - name: Compress project
-        run: zip -r project.zip . -x '*node_modules*' .env
+        run: zip -r project.zip . -x '*node_modules*' '*storage*' .env
 
       - name: Copy code to server
         uses: appleboy/scp-action@master
@@ -113,3 +112,4 @@ jobs:
             cd cederlink.johngachihi.com/public_html/Cederlinks
             unzip -o project.zip
             rm project.zip
+            php artisan storage:link
