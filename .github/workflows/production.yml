@@ -15,28 +15,35 @@ on:
       - 'tsconfig.json'
 
 jobs:
-  build-test-upload:
+  build-test-laravel:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
 
       - name: Install Composer dependencies
         run: composer install
 
-      - name: Install npm dependencies
-        run: npm i
-
-      - name: Setup Laravel for tests
+      - name: Run Laravel tests
         run: |
           cp .env.example .env
           php artisan key:generate
+          vendor/bin/phpunit tests
+          rm .env
 
-      - name: Run phpunit tests
-        run: vendor/bin/phpunit tests
 
-      - name: Remove temp .env
-        run: rm .env
+      - name: Upload vendor
+        uses: actions/upload-artifact@v2
+        with:
+          name: vendor
+          path: vendor
+
+  build-test-js:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install npm dependencies
+        run: npm i
 
       - name: Run jest tests
         run: npm run test
@@ -48,6 +55,31 @@ jobs:
           IMAGES_URL: "https://cederlink.johngachihi.com/storage/images"
           SASS_PATH: ./node_modules
         run: npm run prod
+
+      - name: Upload build
+        uses: actions/upload-artifact@v2
+        with:
+          name: public
+          path: public
+
+  upload:
+    runs-on: ubuntu-latest
+    needs: [build-test-laravel, build-test-js]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download vendor
+        uses: actions/download-artifact@v2
+        with:
+          name: vendor
+
+      - name: Download public
+          uses: actions/download-artifact@v2
+          with:
+            name: public
+
+      - name: Debug
+        run: ls
 
       - name: Compress project
         run: zip -r project.zip . -x '*node_modules*' .env
