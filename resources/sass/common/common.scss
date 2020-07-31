@@ -18,7 +18,7 @@ $white: #fff;
 $black: #000000;
 // $darken: #3a4348;
 
-$primary: #afa939;
+$primary: #557b2e;
 $secondary: #2c2f3a;
 
 
@@ -1804,7 +1804,8 @@ textarea.form-control {
         }
         .submit{
             color: $white !important;
-            background: darken($primary,10%) !important;
+            //background: darken($primary,10%) !important;
+            background: #593a20 !important;
             border-radius: 0px 5px 5px 0px;
             font-size: 16px;
             &:hover{

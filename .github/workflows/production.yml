@@ -89,6 +89,12 @@ jobs:
       - name: Compress project
         run: zip -r project.zip . -x '*node_modules*' '*storage*' .env
 
+      - name: Upload project archive
+        uses: actions/upload-artifact@v2
+        with:
+          name: project
+          path: project.zip
+
       - name: Copy code to server
         uses: appleboy/scp-action@master
         with:
