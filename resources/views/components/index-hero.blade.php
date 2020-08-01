@@ -17,12 +17,14 @@
                     provide our members with unique information and
                     exposure to business opportunities.
                 </p>
-                <p>
-                    <a href="#" class="btn btn-primary mr-md-4 py-2 px-4 _auth-modal-show register">
-                        Become a Member
-                        <span class="ion-ios-arrow-forward"></span>
-                    </a>
-                </p>
+                @guest
+                    <p>
+                        <a href="#" class="btn btn-primary mr-md-4 py-2 px-4 _auth-modal-show register">
+                            Become a Member
+                            <span class="ion-ios-arrow-forward"></span>
+                        </a>
+                    </p>
+                @endguest
             </div>
         </div>
     </div>
