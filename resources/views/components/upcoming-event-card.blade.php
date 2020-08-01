@@ -15,7 +15,7 @@
         <div class="text p-4 float-right d-block">
             <div class="topper d-flex align-items-center">
                 <div class="one py-2 pl-3 pr-1 align-self-stretch">
-                    <span class="day">{{ $mission->date->day ?? "-" }}</span>
+                    <span class="day">{{ str_pad($mission->date->day ?? "-", 2, "0", STR_PAD_LEFT) }}</span>
                 </div>
                 <div class="two pl-0 pr-3 py-2 align-self-stretch">
                     <span class="yr">{{ $mission->date->year ?? "-" }}</span>
