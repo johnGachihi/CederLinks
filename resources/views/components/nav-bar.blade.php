@@ -14,6 +14,7 @@
                         'About' => 'visitors.about',
                         'Services' => 'visitors.services',
                         'Team' => 'visitors.team',
+                        'Upcoming' => 'visitors.upcoming-events',
                         'Partners' => 'visitors.partners',
                         'Contact' => 'visitors.contact'
                     ];

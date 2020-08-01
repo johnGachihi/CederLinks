@@ -305,4 +305,25 @@ class VisitorPagesControllerTest extends TestCase
         $response->assertViewIs("visitors.partners");
     }
 
+    public function test_upcoming_events()
+    {
+        // GIVEN
+        $pastMissions = factory(Mission::class, 3)->create([
+            "date" => Carbon::now()->subDay(),
+            "status" => "published"
+        ]);
+        $upcomingMissions = factory(Mission::class, 2)->create([
+            "date" => Carbon::now()->addDay(),
+            "status" => "published"
+        ]);
+
+        // WHEN
+        $response = $this->get("/upcoming-events");
+
+        // THEN
+        $response->assertViewIs("visitors.upcoming-events");
+
+        $viewData = $response->viewData("missions");
+        $this->assertCount($upcomingMissions->count(), $viewData);
+    }
 }

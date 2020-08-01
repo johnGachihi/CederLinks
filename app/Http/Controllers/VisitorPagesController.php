@@ -38,4 +38,14 @@ class VisitorPagesController extends Controller
             ->with("newest_missions", $newest_missions)
             ->with("approaching_missions", $approaching_missions);
     }
+
+    public function upcoming_events() {
+        $missions = Mission::where("status", "published")
+            ->where("date", ">=", Carbon::now())
+            ->orderBy("date")
+            ->paginate();
+
+        return view('visitors.upcoming-events')
+            ->with("missions", $missions);
+    }
 }
