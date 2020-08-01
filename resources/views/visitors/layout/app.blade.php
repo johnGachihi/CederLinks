@@ -17,7 +17,7 @@
     <script>
         var onloadCallback = function () {
             grecaptcha.render('register-recaptcha', {
-                'sitekey': '6LfZA60UAAAAALEr3Ifkla8UKLp_kq2Jz-IRjWUC',
+                'sitekey': '6LdfuOgUAAAAACfPkV1YQTiP5DzrZVuoQnLThhUe',
                 'callback': window.gcaptcha.onSuccessfulResponse,
                 'expired-callback': window.gcaptcha.onResponseExpired
             })

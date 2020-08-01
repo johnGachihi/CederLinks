@@ -49,7 +49,7 @@ $('#registration-form').on('submit', function (e) {
 
 function validateRegistrationForm(form) {
     let isValid = true;
-    const htmlFields = ['name', 'email', 'password', /*'g-captcha',*/ 't-and-c-checkbox'];
+    const htmlFields = ['name', 'email', 'password', 'g-captcha', 't-and-c-checkbox'];
     for (const fieldName of htmlFields) {
         const field = form[fieldName];
         if (!field.checkValidity()) {
