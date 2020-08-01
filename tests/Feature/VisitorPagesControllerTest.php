@@ -326,4 +326,26 @@ class VisitorPagesControllerTest extends TestCase
         $viewData = $response->viewData("missions");
         $this->assertCount($upcomingMissions->count(), $viewData);
     }
+
+    public function test_past_events()
+    {
+        // GIVEN
+        $pastMissions = factory(Mission::class, 3)->create([
+            "date" => Carbon::now()->subDay(),
+            "status" => "published"
+        ]);
+        $upcomingMissions = factory(Mission::class, 2)->create([
+            "date" => Carbon::now()->addDay(),
+            "status" => "published"
+        ]);
+
+        // WHEN
+        $response = $this->get("/past-events");
+
+        // THEN
+        $response->assertViewIs('visitors.past-events');
+
+        $viewData = $response->viewData("missions");
+        $this->assertCount($pastMissions->count(), $viewData);
+    }
 }

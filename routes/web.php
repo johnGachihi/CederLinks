@@ -19,6 +19,8 @@ Route::name('visitors.')->group(function () {
     Route::view('/partners', 'visitors.partners')->name('partners');
     Route::get('/upcoming-events', 'VisitorPagesController@upcoming_events')
         ->name('upcoming-events');
+    Route::get('/past-events', 'VisitorPagesController@past_events')
+        ->name('past-events');
 
     Route::middleware(['member'])->group(function () {
         Route::get('/mission/{id}', 'VisitorPagesController@single_mission')->name('single-mission');
