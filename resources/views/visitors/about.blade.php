@@ -63,7 +63,7 @@
                         looking for solid and high quality investments
                         for business. I joined and am not looking back.
                     </x-testimonial-card>
-                    <x-testimonial-card
+                    {{--<x-testimonial-card
                         :image="asset('storage/images/person_7.jpg')"
                         name="Joe Maina" position="Manager">
                         We have truly made a lot of positive changes
@@ -79,7 +79,7 @@
                         :image="asset('storage/images/person_7.jpg')"
                         name="John Okwiri" position="Entrepreneur">
                         We have grown from a company of 12 people to over 50 employees thanks to the insights and diligence. Thank you.
-                    </x-testimonial-card>
+                    </x-testimonial-card>--}}
                 </div>
             </div>
         </div>

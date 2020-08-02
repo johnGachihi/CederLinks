@@ -56,11 +56,6 @@
                             </a>
                         </li>
                         <li>
-{{--                            <a class="py-1 d-block">--}}
-                                <span class="ion-ios-arrow-forward mr-3"></span>Membership Policy
-{{--                            </a>--}}
-                        </li>
-                        <li>
                             <a href="{{ route('visitors.team') }}" class="py-1 d-block">
                                 <span class="ion-ios-arrow-forward mr-3"></span>Our Team
                             </a>
@@ -89,7 +84,7 @@
                     <h2 class="ftco-heading-2">Have a Question?</h2>
                     <div class="block-23 mb-3">
                         <ul>
-                            <li><span class="icon icon-map-marker"></span><span class="text">3rd Floor, Karen Plains House, Nairobi,<br> Kenya
+                            <li><span class="icon icon-map-marker"></span><span class="text">2nd Floor, Karen Plains House, Nairobi,<br> Kenya
                             <li><a href="tel:+254 721 403 332"><span class="icon icon-phone"></span><span class="text">+254 721 403 332</span></a>
                             </li>
                             <li><a href=""><span class="icon icon-envelope"></span><span class="text">info@cedarlinks.com</span></a>
@@ -265,6 +260,6 @@
 @endif
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" defer></script>
 </body>
 </html>

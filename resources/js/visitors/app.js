@@ -74,7 +74,10 @@ AOS.init({
     var carousel = function() {
         $('.carousel-testimony').owlCarousel({
             // center: true,
-            loop: false,
+            // loop: true,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            autoplayHoverPause: true,
             items: 3,
             margin: 30,
             stagePadding: 0,
